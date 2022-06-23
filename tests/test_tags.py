@@ -14,3 +14,6 @@ def test_default_tags(tackle_api_gateway):
                                                     'Spring Boot', 'Tomcat', 'WebLogic',
                                                     'WebSphere'], \
                                                     'Tags list check failed! (found : expected)'  # noqa: E501
+
+def test_create_tags(tackle_api_gateway):
+    assert tackle_api_gateway.get_tag() == ['tag1']

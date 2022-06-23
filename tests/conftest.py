@@ -14,9 +14,11 @@ def api_call(function):
     """
     Decorator for api calls.
     """
+
     def wrapper(*args):
         args[0].refresh_api_token()
         return function(*args)
+
     return wrapper
 
 
@@ -24,10 +26,12 @@ class TackleApiGateway:
     """
     Gateway for API operations.
     """
+
     def __init__(self):
         # swagger api clients
         self.clients = []
         self.get_api = swagger_client.api.get_api.GetApi()
+        self.create_api = swagger_client.api.create_api.CreateApi()  # 1
         self.clients.append(self.get_api)  # noqa: E501
 
         # common config
@@ -52,6 +56,11 @@ class TackleApiGateway:
         api = self.get_api.tags_get()
         return [tag.name for tag in api]
 
+    def get_tag(self): 
+        api = self.get_api.tags_get()
+        return [tag.name for tag in api]
+
+
     @property
     def api_token(self):
         """
@@ -60,5 +69,3 @@ class TackleApiGateway:
         return get_key_cloak_token(username=os.environ.get("TACKLE_USER"),
                                    password=os.environ.get("TACKLE_PASSWORD"),
                                    host=os.environ.get("TACKLE_URL"))
-
-
