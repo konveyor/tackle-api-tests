@@ -44,3 +44,6 @@ $ python3.9 -m pytest /home/amos/git/tackle-integration-tests/tests/test_tags.py
 $ python3.9 utils/get-token.py --user=? --password=? --host=?
 
 ##### Note: tackle url should include http:// Or https:// without no closing /
+
+## Code of Conduct
+Refer to Konveyor's Code of Conduct [here](https://github.com/konveyor/community/blob/main/CODE_OF_CONDUCT.md).
