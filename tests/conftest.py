@@ -34,6 +34,7 @@ class TackleApiGateway:
         for cl in self.clients:
             c = cl.api_client.configuration
             c.host = f"{os.environ.get('TACKLE_URL')}/hub/"
+            c.verify_ssl = False
             c.api_key_prefix['Authorization'] = 'Bearer'
 
     def refresh_api_token(self):
@@ -44,7 +45,7 @@ class TackleApiGateway:
             c = cl.api_client.configuration
             c.api_key['Authorization'] = self.api_token
 
-    @api_call
+    # @api_call
     def get_tag_names(self):
         """
         Tag Controller Names.
