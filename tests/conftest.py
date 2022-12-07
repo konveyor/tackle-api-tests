@@ -60,5 +60,3 @@ class TackleApiGateway:
         return get_key_cloak_token(username=os.environ.get("TACKLE_USER"),
                                    password=os.environ.get("TACKLE_PASSWORD"),
                                    host=os.environ.get("TACKLE_URL"))
-
-
