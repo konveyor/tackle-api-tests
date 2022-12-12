@@ -1,12 +1,24 @@
 import logging
 import pytest
+from pytest_check import check
 
 
-@pytest.mark.smoke
-def test_default_tags(tackle_api_gateway):
-    assert set(tackle_api_gateway.get_tag_names()) == {'COTS', 'In house', 'SaaS', 'Boston (USA)', 'London (UK)',
-                                                  'Paris (FR)', 'Sydney (AU)', 'DB2', 'MongoDB', 'Oracle', 'PostgreSQL',
-                                                  'SQL Server', 'C# ASP .Net', 'C++', 'COBOL', 'Java', 'Javascript',
-                                                  'Python', 'RHEL 8', 'Windows Server 2016', 'Z/OS', 'EAP', 'JWS',
-                                                  'Quarkus', 'Spring Boot', 'Tomcat', 'WebLogic', 'WebSphere'}, \
-                                                    'Tags list check failed! (found : expected)'  # noqa: E501
+@pytest.mark.tags
+def test_default_tags(json_file, tackle_api_gateway):
+    assert set(json_file["tags"]).issubset(set(tackle_api_gateway.get_tag_names())), \
+                                                    'Default tags check FAILED! (found : expected)'  # noqa: E501
+
+
+@pytest.mark.tags
+def test_default_tag_types(json_file, tag_types_names):
+    assert set(json_file["tag_types"]).issubset(set(tag_types_names)), 'Default tag types check FAILED!'
+
+
+@pytest.mark.tags
+def test_create_tag(tag_types_ids, create_api, get_api, delete_api):
+    for tagtype_id in tag_types_ids:
+        tag_data = {"name": "Api Tag", "tagType": {"id": tagtype_id}}
+        new_tag = create_api.tags_post(tag_data)
+        new_tag_from_db = get_api.tags_id_get(new_tag.id)
+        check.equal(new_tag_from_db, new_tag, 'Checking the created tag')
+        delete_api.tags_id_delete(str(new_tag.id))

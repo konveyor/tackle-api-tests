@@ -1,13 +1,8 @@
 import os
 import pytest
-
+import json
 import swagger_client
 from utils.helpers import get_key_cloak_token
-
-
-@pytest.fixture(scope="session")
-def tackle_api_gateway():
-    return TackleApiGateway()
 
 
 def api_call(function):
@@ -26,14 +21,17 @@ class TackleApiGateway:
     """
     def __init__(self):
         # swagger api clients
+        swagger_api = swagger_client.api
         self.clients = []
-        self.get_api = swagger_client.api.get_api.GetApi()
-        self.clients.append(self.get_api)  # noqa: E501
+        self.get_api = swagger_api.get_api.GetApi()
+        self.create_api = swagger_api.create_api.CreateApi()
+        self.delete_api = swagger_api.delete_api.DeleteApi()
+        self.clients.extend([self.get_api, self.create_api, self.delete_api])  # noqa: E501
 
         # common config
         for cl in self.clients:
             c = cl.api_client.configuration
-            c.host = f"{os.environ.get('TACKLE_URL')}/hub/"
+            c.host = f"{os.environ.get('TACKLE_URL')}/hub"
             c.api_key_prefix['Authorization'] = 'Bearer'
 
     def refresh_api_token(self):
@@ -60,3 +58,39 @@ class TackleApiGateway:
         return get_key_cloak_token(username=os.environ.get("TACKLE_USER"),
                                    password=os.environ.get("TACKLE_PASSWORD"),
                                    host=os.environ.get("TACKLE_URL"))
+
+
+@pytest.fixture(scope="session")
+def tackle_api_gateway():
+    return TackleApiGateway()
+
+
+@pytest.fixture(scope="session")
+def get_api(tackle_api_gateway):
+    return tackle_api_gateway.get_api
+
+
+@pytest.fixture(scope="session")
+def create_api(tackle_api_gateway):
+    return tackle_api_gateway.create_api
+
+
+@pytest.fixture(scope="session")
+def delete_api(tackle_api_gateway):
+    return tackle_api_gateway.delete_api
+
+
+@pytest.fixture(scope="session")
+def json_file():
+    with open('tests/defaults.json', 'r') as file:
+        yield json.load(file)
+
+
+@pytest.fixture()
+def tag_types_names(get_api):
+    return [tag.name for tag in get_api.tagtypes_get()]
+
+
+@pytest.fixture()
+def tag_types_ids(get_api):
+    return [tag.id for tag in get_api.tagtypes_get()]
