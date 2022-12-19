@@ -16,9 +16,11 @@ def api_call(function):
     """
     Decorator for api calls.
     """
+
     def wrapper(*args):
         args[0].refresh_api_token()
         return function(*args)
+
     return wrapper
 
 
@@ -26,6 +28,7 @@ class TackleApiGateway:
     """
     Gateway for API operations.
     """
+
     def __init__(self):
         # swagger api clients
         swagger_api = swagger_client.api
@@ -111,3 +114,13 @@ def source_username_credentials(module_uuid, create_api, delete_api):
     new_cred = create_api.identities_post(credential_data)
     yield new_cred
     delete_api.identities_id_delete(new_cred.id)
+
+
+@pytest.fixture(scope="session")
+def git_application(source_username_credentials, module_uuid, create_api, get_api, delete_api):
+    application_data = {"name": f"app-{module_uuid}",
+                        "repository": {"kind": "git", "url": config["app_git_url"]},
+                        "identities": [{"id": source_username_credentials.id}]}
+    new_app = create_api.applications_post(application_data)
+    yield new_app
+    delete_api.applications_id_delete(new_app.id)
