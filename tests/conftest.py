@@ -1,8 +1,15 @@
 import os
 import pytest
 import json
+from datetime import datetime
 import swagger_client
 from utils.helpers import get_key_cloak_token
+from pytest_testconfig import config
+
+
+@pytest.fixture(scope="session")
+def module_uuid():
+    return f"api-resource-{datetime.now().strftime('%y-%d-%m-%H-%M-%S')}"
 
 
 def api_call(function):
@@ -94,3 +101,13 @@ def tag_types_names(get_api):
 @pytest.fixture()
 def tag_types_ids(get_api):
     return [tag.id for tag in get_api.tagtypes_get()]
+
+
+@pytest.fixture(scope="session")
+def source_username_credentials(module_uuid, create_api, delete_api):
+    credential_data = {"name": f"source-{module_uuid}", "kind": "source",
+                       "password": config.get("cred_git_token"),
+                       "user": config.get("cred_git_username")}
+    new_cred = create_api.identities_post(credential_data)
+    yield new_cred
+    delete_api.identities_id_delete(new_cred.id)
