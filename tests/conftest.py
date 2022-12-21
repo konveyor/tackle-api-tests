@@ -92,13 +92,13 @@ def delete_api(tackle_api_gateway):
 
 @pytest.fixture(scope="session")
 def json_defaults():
-    with open('tests/files/defaults.json', 'r') as file:
+    with open('data/defaults.json', 'r') as file:
         yield json.load(file)
 
 
 @pytest.fixture(scope="session")
 def json_application():
-    with open('tests/files/application.json', 'r') as file:
+    with open('data/application.json', 'r') as file:
         yield json.load(file)
 
 
