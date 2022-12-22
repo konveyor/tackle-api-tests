@@ -1,17 +1,26 @@
 import os
 import pytest
 import json
+from datetime import datetime
 import swagger_client
 from utils.helpers import get_key_cloak_token
+from pytest_testconfig import config
+
+
+@pytest.fixture(scope="session")
+def module_uuid():
+    return f"api-resource-{datetime.now().strftime('%y-%d-%m-%H-%M-%S')}"
 
 
 def api_call(function):
     """
     Decorator for api calls.
     """
+
     def wrapper(*args):
         args[0].refresh_api_token()
         return function(*args)
+
     return wrapper
 
 
@@ -19,6 +28,7 @@ class TackleApiGateway:
     """
     Gateway for API operations.
     """
+
     def __init__(self):
         # swagger api clients
         swagger_api = swagger_client.api
@@ -81,16 +91,13 @@ def delete_api(tackle_api_gateway):
 
 
 @pytest.fixture(scope="session")
-def json_file():
-    with open('tests/defaults.json', 'r') as file:
+def json_defaults():
+    with open('data/defaults.json', 'r') as file:
         yield json.load(file)
 
 
-@pytest.fixture()
-def tag_types_names(get_api):
-    return [tag.name for tag in get_api.tagtypes_get()]
+@pytest.fixture(scope="session")
+def json_application():
+    with open('data/application.json', 'r') as file:
+        yield json.load(file)
 
-
-@pytest.fixture()
-def tag_types_ids(get_api):
-    return [tag.id for tag in get_api.tagtypes_get()]

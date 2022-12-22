@@ -1,17 +1,18 @@
 import logging
 import pytest
 from pytest_check import check
+from fixtures.tags import *
 
 
 @pytest.mark.tags
-def test_default_tags(json_file, tackle_api_gateway):
-    assert set(json_file["tags"]).issubset(set(tackle_api_gateway.get_tag_names())), \
+def test_default_tags(json_defaults, tackle_api_gateway):
+    assert set(json_defaults["tags"]).issubset(set(tackle_api_gateway.get_tag_names())), \
                                                     'Default tags check FAILED! (found : expected)'  # noqa: E501
 
 
 @pytest.mark.tags
-def test_default_tag_types(json_file, tag_types_names):
-    assert set(json_file["tag_types"]).issubset(set(tag_types_names)), 'Default tag types check FAILED!'
+def test_default_tag_types(json_defaults, tag_types_names):
+    assert set(json_defaults["tag_types"]).issubset(set(tag_types_names)), 'Default tag types check FAILED!'
 
 
 @pytest.mark.tags
