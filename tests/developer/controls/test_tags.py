@@ -1,6 +1,7 @@
 import logging
 import pytest
 from pytest_check import check
+from fixtures.tags import *
 
 
 @pytest.mark.tags

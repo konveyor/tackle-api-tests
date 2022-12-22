@@ -101,33 +101,3 @@ def json_application():
     with open('data/application.json', 'r') as file:
         yield json.load(file)
 
-
-@pytest.fixture()
-def tag_types_names(get_api):
-    return [tag.name for tag in get_api.tagtypes_get()]
-
-
-@pytest.fixture()
-def tag_types_ids(get_api):
-    return [tag.id for tag in get_api.tagtypes_get()]
-
-
-@pytest.fixture(scope="session")
-def source_username_credentials(module_uuid, create_api, delete_api):
-    credential_data = {"name": f"source-{module_uuid}", "kind": "source",
-                       "password": config.get("cred_git_token"),
-                       "user": config.get("cred_git_username")}
-    new_cred = create_api.identities_post(credential_data)
-    yield new_cred
-    delete_api.identities_id_delete(new_cred.id)
-
-
-@pytest.fixture(scope="session")
-def git_application(source_username_credentials, json_application, module_uuid, create_api, get_api, delete_api):
-    application_data = {"name": f"app-{module_uuid}",
-                        "identities": [{"id": source_username_credentials.id}]}
-    for key, value in json_application[0].items():
-        application_data[key] = value
-    new_app = create_api.applications_post(application_data)
-    yield new_app
-    delete_api.applications_id_delete(new_app.id)
