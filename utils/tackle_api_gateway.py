@@ -1,15 +1,35 @@
 import os
 import pytest
-import json
-from datetime import datetime
 import swagger_client
-from utils.helpers import get_key_cloak_token
-from pytest_testconfig import config
+from keycloak import KeycloakOpenID
 
 
-@pytest.fixture(scope="session")
-def module_uuid():
-    return f"api-resource-{datetime.now().strftime('%y-%d-%m-%H-%M-%S')}"
+# Borg Pattern
+# https://github.com/faif/python-patterns/blob/master/patterns/creational/borg.py
+class TackleClient:
+    __shared_state = {}
+
+    def __init__(self):
+        if not TackleClient.__shared_state:
+            TackleClient.__shared_state = self.__dict__
+            self.realm_name = "tackle"
+            self.client_id = "tackle-ui"
+            self.url = os.environ.get("TACKLE_URL")
+            self.username = os.environ.get("TACKLE_USER")
+            self.password = os.environ.get("TACKLE_PASSWORD")
+            self.keycloak_openid = None
+
+        else:
+            self.__dict__ = TackleClient.__shared_state
+
+    def get_access_token(self):
+        # Configure client if not exist
+        if not self.keycloak_openid:
+            self.keycloak_openid = KeycloakOpenID(server_url=f"{self.url}/auth/",
+                                                  client_id=self.client_id,
+                                                  realm_name=self.realm_name,
+                                                  verify=False)
+        return self.keycloak_openid.token(self.username, self.password)["access_token"]
 
 
 def api_call(function):
@@ -28,7 +48,6 @@ class TackleApiGateway:
     """
     Gateway for API operations.
     """
-
     def __init__(self):
         # swagger api clients
         swagger_api = swagger_client.api
@@ -37,12 +56,14 @@ class TackleApiGateway:
         self.create_api = swagger_api.create_api.CreateApi()
         self.delete_api = swagger_api.delete_api.DeleteApi()
         self.clients.extend([self.get_api, self.create_api, self.delete_api])  # noqa: E501
+        self.tackle_client = TackleClient()
 
         # common config
         for cl in self.clients:
             c = cl.api_client.configuration
             c.host = f"{os.environ.get('TACKLE_URL')}/hub"
             c.api_key_prefix['Authorization'] = 'Bearer'
+            c.api_key['Authorization'] = self.__getattribute__("api_token")
 
     def refresh_api_token(self):
         """
@@ -65,39 +86,10 @@ class TackleApiGateway:
         """
         Get a Refreshed API token by sending another authentication request to keycloak.
         """
-        return get_key_cloak_token(username=os.environ.get("TACKLE_USER"),
-                                   password=os.environ.get("TACKLE_PASSWORD"),
-                                   host=os.environ.get("TACKLE_URL"))
+        t = TackleClient()
+        return t.get_access_token()
 
 
 @pytest.fixture(scope="session")
 def tackle_api_gateway():
     return TackleApiGateway()
-
-
-@pytest.fixture(scope="session")
-def get_api(tackle_api_gateway):
-    return tackle_api_gateway.get_api
-
-
-@pytest.fixture(scope="session")
-def create_api(tackle_api_gateway):
-    return tackle_api_gateway.create_api
-
-
-@pytest.fixture(scope="session")
-def delete_api(tackle_api_gateway):
-    return tackle_api_gateway.delete_api
-
-
-@pytest.fixture(scope="session")
-def json_defaults():
-    with open('data/defaults.json', 'r') as file:
-        yield json.load(file)
-
-
-@pytest.fixture(scope="session")
-def json_application():
-    with open('data/application.json', 'r') as file:
-        yield json.load(file)
-
