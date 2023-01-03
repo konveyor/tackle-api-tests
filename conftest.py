@@ -3,9 +3,12 @@ import json
 from datetime import datetime
 
 # project root conftest.py
+
 pytest_plugins = [
     "fixtures.apis",
-    "utils.tackle_api_gateway"
+    "fixtures.application_inventory",
+    "fixtures.credentials",
+    "fixtures.tags"
 ]
 
 
