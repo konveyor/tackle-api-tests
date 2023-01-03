@@ -1,5 +1,4 @@
 import pytest
-from fixtures.application_inventory import *
 
 
 @pytest.mark.analysis

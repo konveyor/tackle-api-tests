@@ -1,6 +1,5 @@
 import argparse
-
-from utils.helpers import get_key_cloak_token
+from tackle_api_gateway import TackleClient
 
 parser = argparse.ArgumentParser(description='Konveyor Tackle maintenance tool.')
 parser.add_argument('-u', '--user', dest='user', type=str, help='username')
@@ -10,4 +9,8 @@ args = parser.parse_args()
 
 
 if __name__ == "__main__":
-    print(get_key_cloak_token(host=args.host, username=args.user, password=args.password))
+    tackle_client = TackleClient()
+    tackle_client.url = args.host
+    tackle_client.username = args.user
+    tackle_client.password = args.password
+    print(f"Bearer {tackle_client.get_access_token()}")
