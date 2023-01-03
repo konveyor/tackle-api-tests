@@ -73,14 +73,6 @@ class TackleApiGateway:
             c = cl.api_client.configuration
             c.api_key['Authorization'] = self.api_token
 
-    @api_call
-    def get_tag_names(self):
-        """
-        Tag Controller Names.
-        """
-        api = self.get_api.tags_get()
-        return [tag.name for tag in api]
-
     @property
     def api_token(self):
         """
@@ -88,8 +80,3 @@ class TackleApiGateway:
         """
         t = TackleClient()
         return t.get_access_token()
-
-
-@pytest.fixture(scope="session")
-def tackle_api_gateway():
-    return TackleApiGateway()
