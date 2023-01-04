@@ -1,0 +1,8 @@
+#Doc: https://git-scm.com/docs/gitignore
+
+# Ignore .idea folder
+.idea
+# Ignore __pycache__ folders
+__pycache__/
+# Ignore venv folder
+venv
