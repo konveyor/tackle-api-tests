@@ -55,7 +55,8 @@ class TackleApiGateway:
         self.get_api = swagger_api.get_api.GetApi()
         self.create_api = swagger_api.create_api.CreateApi()
         self.delete_api = swagger_api.delete_api.DeleteApi()
-        self.clients.extend([self.get_api, self.create_api, self.delete_api])  # noqa: E501
+        self.update_api = swagger_api.update_api.UpdateApi()
+        self.clients.extend([self.get_api, self.create_api, self.delete_api, self.update_api])  # noqa: E501
         self.tackle_client = TackleClient()
 
         # common config

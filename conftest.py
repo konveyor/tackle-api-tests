@@ -13,18 +13,8 @@ pytest_plugins = [
 
 
 @pytest.fixture(scope="session")
-def module_uuid():
-    return f"api-resource-{datetime.now().strftime('%y-%d-%m-%H-%M-%S')}"
-
-
-@pytest.fixture(scope="session")
 def json_defaults():
     with open('data/defaults.json', 'r') as file:
         yield json.load(file)
 
-
-@pytest.fixture(scope="session")
-def json_application():
-    with open('data/application.json', 'r') as file:
-        yield json.load(file)
 

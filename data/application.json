@@ -1,5 +1,14 @@
 [
   {
+    "name": "book-server",
+    "repository": {
+      "kind": "git",
+      "url": "https://github.com/ibraginsky/book-server"
+    }
+  },
+  {
+    "name": "tackle-testapp",
+    "identities": [],
     "repository": {
       "kind": "git",
       "url": "https://github.com/konveyor/tackle-testapp"
