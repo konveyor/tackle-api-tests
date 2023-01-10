@@ -60,7 +60,6 @@ class RESTClientObject(object):
         # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  # noqa: E501
 
         # cert_reqs
-        configuration.verify_ssl = False
         if configuration.verify_ssl:
             cert_reqs = ssl.CERT_REQUIRED
         else:

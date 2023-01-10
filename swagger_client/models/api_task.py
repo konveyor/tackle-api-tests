@@ -36,47 +36,57 @@ class ApiTask(object):
         'addon': 'str',
         'application': 'ApiRef',
         'bucket': 'str',
+        'canceled': 'bool',
         'create_time': 'str',
         'create_user': 'str',
         'data': 'object',
         'error': 'str',
         'id': 'int',
         'image': 'str',
-        'isolated': 'bool',
-        'job': 'str',
         'locator': 'str',
         'name': 'str',
+        'pod': 'str',
+        'policy': 'str',
+        'priority': 'int',
         'purged': 'bool',
         'report': 'ApiTaskReport',
+        'retries': 'int',
         'started': 'str',
         'state': 'str',
         'terminated': 'str',
-        'update_user': 'str'
+        'ttl': 'ApiTTL',
+        'update_user': 'str',
+        'variant': 'str'
     }
 
     attribute_map = {
         'addon': 'addon',
         'application': 'application',
         'bucket': 'bucket',
+        'canceled': 'canceled',
         'create_time': 'createTime',
         'create_user': 'createUser',
         'data': 'data',
         'error': 'error',
         'id': 'id',
         'image': 'image',
-        'isolated': 'isolated',
-        'job': 'job',
         'locator': 'locator',
         'name': 'name',
+        'pod': 'pod',
+        'policy': 'policy',
+        'priority': 'priority',
         'purged': 'purged',
         'report': 'report',
+        'retries': 'retries',
         'started': 'started',
         'state': 'state',
         'terminated': 'terminated',
-        'update_user': 'updateUser'
+        'ttl': 'ttl',
+        'update_user': 'updateUser',
+        'variant': 'variant'
     }
 
-    def __init__(self, addon=None, application=None, bucket=None, create_time=None, create_user=None, data=None, error=None, id=None, image=None, isolated=None, job=None, locator=None, name=None, purged=None, report=None, started=None, state=None, terminated=None, update_user=None, _configuration=None):  # noqa: E501
+    def __init__(self, addon=None, application=None, bucket=None, canceled=None, create_time=None, create_user=None, data=None, error=None, id=None, image=None, locator=None, name=None, pod=None, policy=None, priority=None, purged=None, report=None, retries=None, started=None, state=None, terminated=None, ttl=None, update_user=None, variant=None, _configuration=None):  # noqa: E501
         """ApiTask - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
@@ -85,22 +95,27 @@ class ApiTask(object):
         self._addon = None
         self._application = None
         self._bucket = None
+        self._canceled = None
         self._create_time = None
         self._create_user = None
         self._data = None
         self._error = None
         self._id = None
         self._image = None
-        self._isolated = None
-        self._job = None
         self._locator = None
         self._name = None
+        self._pod = None
+        self._policy = None
+        self._priority = None
         self._purged = None
         self._report = None
+        self._retries = None
         self._started = None
         self._state = None
         self._terminated = None
+        self._ttl = None
         self._update_user = None
+        self._variant = None
         self.discriminator = None
 
         self.addon = addon
@@ -108,6 +123,8 @@ class ApiTask(object):
             self.application = application
         if bucket is not None:
             self.bucket = bucket
+        if canceled is not None:
+            self.canceled = canceled
         if create_time is not None:
             self.create_time = create_time
         if create_user is not None:
@@ -119,26 +136,34 @@ class ApiTask(object):
             self.id = id
         if image is not None:
             self.image = image
-        if isolated is not None:
-            self.isolated = isolated
-        if job is not None:
-            self.job = job
         if locator is not None:
             self.locator = locator
         if name is not None:
             self.name = name
+        if pod is not None:
+            self.pod = pod
+        if policy is not None:
+            self.policy = policy
+        if priority is not None:
+            self.priority = priority
         if purged is not None:
             self.purged = purged
         if report is not None:
             self.report = report
+        if retries is not None:
+            self.retries = retries
         if started is not None:
             self.started = started
         if state is not None:
             self.state = state
         if terminated is not None:
             self.terminated = terminated
+        if ttl is not None:
+            self.ttl = ttl
         if update_user is not None:
             self.update_user = update_user
+        if variant is not None:
+            self.variant = variant
 
     @property
     def addon(self):
@@ -204,6 +229,27 @@ class ApiTask(object):
         """
 
         self._bucket = bucket
+
+    @property
+    def canceled(self):
+        """Gets the canceled of this ApiTask.  # noqa: E501
+
+
+        :return: The canceled of this ApiTask.  # noqa: E501
+        :rtype: bool
+        """
+        return self._canceled
+
+    @canceled.setter
+    def canceled(self, canceled):
+        """Sets the canceled of this ApiTask.
+
+
+        :param canceled: The canceled of this ApiTask.  # noqa: E501
+        :type: bool
+        """
+
+        self._canceled = canceled
 
     @property
     def create_time(self):
@@ -334,48 +380,6 @@ class ApiTask(object):
         self._image = image
 
     @property
-    def isolated(self):
-        """Gets the isolated of this ApiTask.  # noqa: E501
-
-
-        :return: The isolated of this ApiTask.  # noqa: E501
-        :rtype: bool
-        """
-        return self._isolated
-
-    @isolated.setter
-    def isolated(self, isolated):
-        """Sets the isolated of this ApiTask.
-
-
-        :param isolated: The isolated of this ApiTask.  # noqa: E501
-        :type: bool
-        """
-
-        self._isolated = isolated
-
-    @property
-    def job(self):
-        """Gets the job of this ApiTask.  # noqa: E501
-
-
-        :return: The job of this ApiTask.  # noqa: E501
-        :rtype: str
-        """
-        return self._job
-
-    @job.setter
-    def job(self, job):
-        """Sets the job of this ApiTask.
-
-
-        :param job: The job of this ApiTask.  # noqa: E501
-        :type: str
-        """
-
-        self._job = job
-
-    @property
     def locator(self):
         """Gets the locator of this ApiTask.  # noqa: E501
 
@@ -418,6 +422,69 @@ class ApiTask(object):
         self._name = name
 
     @property
+    def pod(self):
+        """Gets the pod of this ApiTask.  # noqa: E501
+
+
+        :return: The pod of this ApiTask.  # noqa: E501
+        :rtype: str
+        """
+        return self._pod
+
+    @pod.setter
+    def pod(self, pod):
+        """Sets the pod of this ApiTask.
+
+
+        :param pod: The pod of this ApiTask.  # noqa: E501
+        :type: str
+        """
+
+        self._pod = pod
+
+    @property
+    def policy(self):
+        """Gets the policy of this ApiTask.  # noqa: E501
+
+
+        :return: The policy of this ApiTask.  # noqa: E501
+        :rtype: str
+        """
+        return self._policy
+
+    @policy.setter
+    def policy(self, policy):
+        """Sets the policy of this ApiTask.
+
+
+        :param policy: The policy of this ApiTask.  # noqa: E501
+        :type: str
+        """
+
+        self._policy = policy
+
+    @property
+    def priority(self):
+        """Gets the priority of this ApiTask.  # noqa: E501
+
+
+        :return: The priority of this ApiTask.  # noqa: E501
+        :rtype: int
+        """
+        return self._priority
+
+    @priority.setter
+    def priority(self, priority):
+        """Sets the priority of this ApiTask.
+
+
+        :param priority: The priority of this ApiTask.  # noqa: E501
+        :type: int
+        """
+
+        self._priority = priority
+
+    @property
     def purged(self):
         """Gets the purged of this ApiTask.  # noqa: E501
 
@@ -458,6 +525,27 @@ class ApiTask(object):
         """
 
         self._report = report
+
+    @property
+    def retries(self):
+        """Gets the retries of this ApiTask.  # noqa: E501
+
+
+        :return: The retries of this ApiTask.  # noqa: E501
+        :rtype: int
+        """
+        return self._retries
+
+    @retries.setter
+    def retries(self, retries):
+        """Sets the retries of this ApiTask.
+
+
+        :param retries: The retries of this ApiTask.  # noqa: E501
+        :type: int
+        """
+
+        self._retries = retries
 
     @property
     def started(self):
@@ -523,6 +611,27 @@ class ApiTask(object):
         self._terminated = terminated
 
     @property
+    def ttl(self):
+        """Gets the ttl of this ApiTask.  # noqa: E501
+
+
+        :return: The ttl of this ApiTask.  # noqa: E501
+        :rtype: ApiTTL
+        """
+        return self._ttl
+
+    @ttl.setter
+    def ttl(self, ttl):
+        """Sets the ttl of this ApiTask.
+
+
+        :param ttl: The ttl of this ApiTask.  # noqa: E501
+        :type: ApiTTL
+        """
+
+        self._ttl = ttl
+
+    @property
     def update_user(self):
         """Gets the update_user of this ApiTask.  # noqa: E501
 
@@ -542,6 +651,27 @@ class ApiTask(object):
         """
 
         self._update_user = update_user
+
+    @property
+    def variant(self):
+        """Gets the variant of this ApiTask.  # noqa: E501
+
+
+        :return: The variant of this ApiTask.  # noqa: E501
+        :rtype: str
+        """
+        return self._variant
+
+    @variant.setter
+    def variant(self, variant):
+        """Sets the variant of this ApiTask.
+
+
+        :param variant: The variant of this ApiTask.  # noqa: E501
+        :type: str
+        """
+
+        self._variant = variant
 
     def to_dict(self):
         """Returns the model properties as a dict"""

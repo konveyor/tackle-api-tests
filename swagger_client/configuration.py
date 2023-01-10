@@ -40,7 +40,7 @@ class Configuration(object):
             return
 
         # Default Base url
-        self.host = "http://192.168.39.186/hub"
+        self.host = "https://localhost"
         # Temp file folder for downloading files
         self.temp_folder_path = None
 

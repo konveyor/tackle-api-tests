@@ -36,7 +36,6 @@ class ApiIdentity(object):
         'create_time': 'str',
         'create_user': 'str',
         'description': 'str',
-        'encrypted': 'str',
         'id': 'int',
         'key': 'str',
         'kind': 'str',
@@ -51,7 +50,6 @@ class ApiIdentity(object):
         'create_time': 'createTime',
         'create_user': 'createUser',
         'description': 'description',
-        'encrypted': 'encrypted',
         'id': 'id',
         'key': 'key',
         'kind': 'kind',
@@ -62,7 +60,7 @@ class ApiIdentity(object):
         'user': 'user'
     }
 
-    def __init__(self, create_time=None, create_user=None, description=None, encrypted=None, id=None, key=None, kind=None, name=None, password=None, settings=None, update_user=None, user=None, _configuration=None):  # noqa: E501
+    def __init__(self, create_time=None, create_user=None, description=None, id=None, key=None, kind=None, name=None, password=None, settings=None, update_user=None, user=None, _configuration=None):  # noqa: E501
         """ApiIdentity - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
@@ -71,7 +69,6 @@ class ApiIdentity(object):
         self._create_time = None
         self._create_user = None
         self._description = None
-        self._encrypted = None
         self._id = None
         self._key = None
         self._kind = None
@@ -88,8 +85,6 @@ class ApiIdentity(object):
             self.create_user = create_user
         if description is not None:
             self.description = description
-        if encrypted is not None:
-            self.encrypted = encrypted
         if id is not None:
             self.id = id
         if key is not None:
@@ -167,27 +162,6 @@ class ApiIdentity(object):
         """
 
         self._description = description
-
-    @property
-    def encrypted(self):
-        """Gets the encrypted of this ApiIdentity.  # noqa: E501
-
-
-        :return: The encrypted of this ApiIdentity.  # noqa: E501
-        :rtype: str
-        """
-        return self._encrypted
-
-    @encrypted.setter
-    def encrypted(self, encrypted):
-        """Sets the encrypted of this ApiIdentity.
-
-
-        :param encrypted: The encrypted of this ApiIdentity.  # noqa: E501
-        :type: str
-        """
-
-        self._encrypted = encrypted
 
     @property
     def id(self):

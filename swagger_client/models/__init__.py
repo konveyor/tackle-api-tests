@@ -20,6 +20,7 @@ from swagger_client.models.api_application import ApiApplication
 from swagger_client.models.api_business_service import ApiBusinessService
 from swagger_client.models.api_copy_request import ApiCopyRequest
 from swagger_client.models.api_dependency import ApiDependency
+from swagger_client.models.api_dependency_graph import ApiDependencyGraph
 from swagger_client.models.api_facts import ApiFacts
 from swagger_client.models.api_identity import ApiIdentity
 from swagger_client.models.api_import import ApiImport
@@ -29,11 +30,14 @@ from swagger_client.models.api_proxy import ApiProxy
 from swagger_client.models.api_ref import ApiRef
 from swagger_client.models.api_repository import ApiRepository
 from swagger_client.models.api_review import ApiReview
+from swagger_client.models.api_schema import ApiSchema
 from swagger_client.models.api_setting import ApiSetting
 from swagger_client.models.api_stakeholder import ApiStakeholder
 from swagger_client.models.api_stakeholder_group import ApiStakeholderGroup
+from swagger_client.models.api_ttl import ApiTTL
 from swagger_client.models.api_tag import ApiTag
 from swagger_client.models.api_tag_type import ApiTagType
 from swagger_client.models.api_task import ApiTask
 from swagger_client.models.api_task_group import ApiTaskGroup
 from swagger_client.models.api_task_report import ApiTaskReport
+from swagger_client.models.api_volume import ApiVolume

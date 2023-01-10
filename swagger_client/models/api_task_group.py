@@ -40,7 +40,6 @@ class ApiTaskGroup(object):
         'data': 'object',
         'id': 'int',
         'name': 'str',
-        'purged': 'bool',
         'state': 'str',
         'tasks': 'list[ApiTask]',
         'update_user': 'str'
@@ -54,13 +53,12 @@ class ApiTaskGroup(object):
         'data': 'data',
         'id': 'id',
         'name': 'name',
-        'purged': 'purged',
         'state': 'state',
         'tasks': 'tasks',
         'update_user': 'updateUser'
     }
 
-    def __init__(self, addon=None, bucket=None, create_time=None, create_user=None, data=None, id=None, name=None, purged=None, state=None, tasks=None, update_user=None, _configuration=None):  # noqa: E501
+    def __init__(self, addon=None, bucket=None, create_time=None, create_user=None, data=None, id=None, name=None, state=None, tasks=None, update_user=None, _configuration=None):  # noqa: E501
         """ApiTaskGroup - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
@@ -73,7 +71,6 @@ class ApiTaskGroup(object):
         self._data = None
         self._id = None
         self._name = None
-        self._purged = None
         self._state = None
         self._tasks = None
         self._update_user = None
@@ -92,8 +89,6 @@ class ApiTaskGroup(object):
             self.id = id
         if name is not None:
             self.name = name
-        if purged is not None:
-            self.purged = purged
         if state is not None:
             self.state = state
         if tasks is not None:
@@ -249,27 +244,6 @@ class ApiTaskGroup(object):
         """
 
         self._name = name
-
-    @property
-    def purged(self):
-        """Gets the purged of this ApiTaskGroup.  # noqa: E501
-
-
-        :return: The purged of this ApiTaskGroup.  # noqa: E501
-        :rtype: bool
-        """
-        return self._purged
-
-    @purged.setter
-    def purged(self, purged):
-        """Sets the purged of this ApiTaskGroup.
-
-
-        :param purged: The purged of this ApiTaskGroup.  # noqa: E501
-        :type: bool
-        """
-
-        self._purged = purged
 
     @property
     def state(self):

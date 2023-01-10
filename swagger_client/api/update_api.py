@@ -1162,6 +1162,109 @@ class UpdateApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
+    def taskgroups_id_put(self, id, task, **kwargs):  # noqa: E501
+        """Update a task group.  # noqa: E501
+
+        Update a task group.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.taskgroups_id_put(id, task, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Task ID (required)
+        :param ApiTask task: Task data (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.taskgroups_id_put_with_http_info(id, task, **kwargs)  # noqa: E501
+        else:
+            (data) = self.taskgroups_id_put_with_http_info(id, task, **kwargs)  # noqa: E501
+            return data
+
+    def taskgroups_id_put_with_http_info(self, id, task, **kwargs):  # noqa: E501
+        """Update a task group.  # noqa: E501
+
+        Update a task group.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.taskgroups_id_put_with_http_info(id, task, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Task ID (required)
+        :param ApiTask task: Task data (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'task']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method taskgroups_id_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if self.api_client.client_side_validation and ('id' not in params or
+                                                       params['id'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `id` when calling `taskgroups_id_put`")  # noqa: E501
+        # verify the required parameter 'task' is set
+        if self.api_client.client_side_validation and ('task' not in params or
+                                                       params['task'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `task` when calling `taskgroups_id_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'task' in params:
+            body_params = params['task']
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['bearerAuth']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/taskgroups/{id}', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
     def taskgroups_id_submit_put(self, id, **kwargs):  # noqa: E501
         """Submit a task group.  # noqa: E501
 
@@ -1173,6 +1276,7 @@ class UpdateApi(object):
 
         :param async_req bool
         :param str id: TaskGroup ID (required)
+        :param ApiTaskGroup taskgroup: TaskGroup data (optional)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1195,12 +1299,13 @@ class UpdateApi(object):
 
         :param async_req bool
         :param str id: TaskGroup ID (required)
+        :param ApiTaskGroup taskgroup: TaskGroup data (optional)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['id']  # noqa: E501
+        all_params = ['id', 'taskgroup']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1234,6 +1339,8 @@ class UpdateApi(object):
         local_var_files = {}
 
         body_params = None
+        if 'taskgroup' in params:
+            body_params = params['taskgroup']
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
@@ -1258,9 +1365,9 @@ class UpdateApi(object):
             collection_formats=collection_formats)
 
     def tasks_id_put(self, id, task, **kwargs):  # noqa: E501
-        """Update a task group.  # noqa: E501
+        """Update a task.  # noqa: E501
 
-        Update a task group.  # noqa: E501
+        Update a task.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.tasks_id_put(id, task, async_req=True)
@@ -1281,9 +1388,9 @@ class UpdateApi(object):
             return data
 
     def tasks_id_put_with_http_info(self, id, task, **kwargs):  # noqa: E501
-        """Update a task group.  # noqa: E501
+        """Update a task.  # noqa: E501
 
-        Update a task group.  # noqa: E501
+        Update a task.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.tasks_id_put_with_http_info(id, task, async_req=True)
@@ -1684,6 +1791,7 @@ class UpdateApi(object):
 
         :param async_req bool
         :param str id: Task ID (required)
+        :param ApiTask task: Task data (optional)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
@@ -1706,12 +1814,13 @@ class UpdateApi(object):
 
         :param async_req bool
         :param str id: Task ID (required)
+        :param ApiTask task: Task data (optional)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['id']  # noqa: E501
+        all_params = ['id', 'task']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1745,6 +1854,8 @@ class UpdateApi(object):
         local_var_files = {}
 
         body_params = None
+        if 'task' in params:
+            body_params = params['task']
         # HTTP header `Content-Type`
         header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
@@ -1754,6 +1865,109 @@ class UpdateApi(object):
 
         return self.api_client.call_api(
             '/tasks/{id}/submit', 'PUT',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def volumes_id_put(self, id, job_function, **kwargs):  # noqa: E501
+        """Update a volume.  # noqa: E501
+
+        Update a volume.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.volumes_id_put(id, job_function, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Volume ID (required)
+        :param ApiVolume job_function: Volume data (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.volumes_id_put_with_http_info(id, job_function, **kwargs)  # noqa: E501
+        else:
+            (data) = self.volumes_id_put_with_http_info(id, job_function, **kwargs)  # noqa: E501
+            return data
+
+    def volumes_id_put_with_http_info(self, id, job_function, **kwargs):  # noqa: E501
+        """Update a volume.  # noqa: E501
+
+        Update a volume.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.volumes_id_put_with_http_info(id, job_function, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Volume ID (required)
+        :param ApiVolume job_function: Volume data (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'job_function']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method volumes_id_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if self.api_client.client_side_validation and ('id' not in params or
+                                                       params['id'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `id` when calling `volumes_id_put`")  # noqa: E501
+        # verify the required parameter 'job_function' is set
+        if self.api_client.client_side_validation and ('job_function' not in params or
+                                                       params['job_function'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `job_function` when calling `volumes_id_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'job_function' in params:
+            body_params = params['job_function']
+        # HTTP header `Content-Type`
+        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
+            ['application/json'])  # noqa: E501
+
+        # Authentication setting
+        auth_settings = ['bearerAuth']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/volumes/{id}', 'PUT',
             path_params,
             query_params,
             header_params,
