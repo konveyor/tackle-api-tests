@@ -3,6 +3,10 @@ pipeline{
     agent {
         label 'minikube-fedora35'
     }
+    environment{
+        TACKLE_USER = "admin"
+        TACKLE_PASSWORD = "Passw0rd!"
+    }
     stages{
         stage('Install & run minikube'){
             steps{
@@ -51,6 +55,13 @@ EOF
             steps{
                 script{
                     sh "ls"
+                    sh "pipenv install"
+                    env.TACKLE_URL = "http://"+sh(
+                        script : 'minikube ip',
+                        returnStdout: true
+                    ).trim()
+                    env.
+                    sh "pipenv run pytest"
                 }
             }
         }
