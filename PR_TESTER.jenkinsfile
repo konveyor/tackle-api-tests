@@ -62,7 +62,7 @@ EOF
                         returnStdout: true
                     ).trim()
                     sh "env"
-                    sh "sleep 100s"
+                    sh "sleep 150s"
                     sh "pipenv run pytest"
                 }
             }
