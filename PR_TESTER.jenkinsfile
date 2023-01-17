@@ -1,4 +1,4 @@
-@Library('migrationqe-automation-lib')
+// @Library('migrationqe-automation-lib')
 pipeline{
     agent {
         label 'minikube-fedora35'
