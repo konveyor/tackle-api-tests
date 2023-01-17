@@ -60,7 +60,8 @@ EOF
                         script : 'minikube ip',
                         returnStdout: true
                     ).trim()
-                    
+                    sh "env"
+                    sh "sleep 100s"
                     sh "pipenv run pytest"
                 }
             }
