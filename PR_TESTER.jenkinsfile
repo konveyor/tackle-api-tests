@@ -52,17 +52,30 @@ pipeline{
             }
             steps{
                 script{
-                    sh "pipenv install"
+                    sh "pipenv run pip install -r requirements.txt"
                     env.TACKLE_URL = "http://"+sh(
                         script : 'minikube ip',
                         returnStdout: true
                     ).trim()
+                    env.keycloakAdminPassword = sh(
+                        script: "oc get secret tackle-keycloak-sso -nkonveyor-tackle -o jsonpath='{.data.admin-password}' | base64 -d",
+                        returnStdout: true
+                    ).trim()
+                    sh "env"
                     ocp.pollRouteUntilReady(env.TACKLE_URL,15,30)
                     repo.checkout("https://gitlab.cee.redhat.com/mta-qe/tackle-api-tests-config.git","main")
                     sh "ls"
                     sh "sleep 40s" //Grace period after the application is serving correctly.
-                    sh "pipenv run pytest --tc-file=$WORKSPACE/tackle-api-tests-config/config.json --tc-format=json"
+                    sh "pipenv run pytest -v --tc-file=$WORKSPACE/tackle-api-tests-config/config.json --tc-format=json"
                 }
+            }
+        }
+    }
+    post{
+        always{
+            script{
+                // cleanWs()
+                echo "this will clean the workspace after use."
             }
         }
     }
