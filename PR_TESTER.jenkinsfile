@@ -9,6 +9,10 @@ pipeline{
     }
     stages{
         stage('Install & run minikube'){
+            when{
+                branch pattern: '^PR-.*$',
+                comparator: 'REGEXP'
+            }
             steps{
                 script{
                     checkout scm
@@ -42,6 +46,10 @@ pipeline{
             }
         }
         stage('Run tackle api tests'){
+            when{
+                branch pattern: '^PR-.*$',
+                comparator: 'REGEXP'
+            }
             steps{
                 script{
                     sh "pipenv install"
