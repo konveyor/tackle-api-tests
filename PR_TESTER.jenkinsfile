@@ -35,27 +35,15 @@ pipeline{
                             done
 
                             """
-                    sh '''cat <<EOF | oc apply -f -
-kind: Tackle
-apiVersion: tackle.konveyor.io/v1alpha1
-metadata:
-  name: tackle
-  namespace: konveyor-tackle
-spec: {
-  keycloak_sso_req_passwd_update: "false",
-  hub_bucket_volume_size: 20Gi,
-  maven_data_volume_size: 20Gi  
-}
-EOF
 
-'''
+                            echo "Applying tackle CR"
+                            tackle.applyTackleCR() //Tackle CR will be applied with using default password `Passw0rd!`.
                 }
             }
         }
         stage('Run tackle api tests'){
             steps{
                 script{
-                    sh "ls"
                     sh "pipenv install"
                     env.TACKLE_URL = "http://"+sh(
                         script : 'minikube ip',
