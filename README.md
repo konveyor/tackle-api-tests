@@ -6,7 +6,7 @@ Will cover basic API test to run sanity or smoke tests against a new build of TA
 
 PR Reviewer :sshveta@redhat.com
 
-Originally written by: amastbau@redhat.com  
+Maintained by: mguetta@redhat.com
 
 ## Run Tests
 
