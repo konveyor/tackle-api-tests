@@ -58,8 +58,10 @@ pipeline{
                         returnStdout: true
                     ).trim()
                     ocp.pollRouteUntilReady(env.TACKLE_URL,15,30)
+                    repo.checkout("https://gitlab.cee.redhat.com/mta-qe/tackle-api-tests-config.git","main")
+                    sh "ls"
                     sh "sleep 40s" //Grace period after the application is serving correctly.
-                    sh "pipenv run pytest"
+                    sh "pipenv run pytest --tc-file=$WORKSPACE/tackle-api-tests-config/config.json --tc-format=json"
                 }
             }
         }
