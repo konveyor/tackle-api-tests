@@ -17,3 +17,8 @@ def create_api():
 @pytest.fixture(scope="session")
 def delete_api():
     return tackle_api_gateway.delete_api
+
+
+@pytest.fixture(scope="session")
+def update_api():
+    return tackle_api_gateway.update_api
