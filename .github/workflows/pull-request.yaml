@@ -3,12 +3,6 @@ run-name: Check pull request created by @${{ github.actor }}
 on: [pull_request]
 
 jobs:
-  assign:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: hkusu/review-assign-action@v1
-        with:
-          reviewers: sshveta # if draft, assigned when draft is released
   run-tests:
     runs-on: ubuntu-latest
     strategy:
