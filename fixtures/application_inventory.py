@@ -17,7 +17,7 @@ def json_analysis():
     with open("data/analysis.json", "r") as file:
         json_list = json.load(file)
     #  Filter out duplicates
-    return {value["appName"]: value for value in json_list}
+    return {value['app_name']: value for value in json_list}
 
 
 @pytest.fixture(scope="session")

@@ -1,17 +1,16 @@
 [
   {
-    "appName": "book-server",
+    "app_name": "book-server",
     "targets": [
       "cloud-readiness"
     ],
-    "storyPoints": 5
+    "story_points": 5
   },
   {
-    "appName": "tackle-testapp",
+    "app_name": "tackle-testapp",
     "targets": [
-      "jakarta-ee",
       "cloud-readiness"
     ],
-    "storyPoints": 1
+    "story_points": 1
   }
 ]
