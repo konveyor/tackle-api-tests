@@ -19,7 +19,7 @@ pipeline{
                     sh """ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
                             chmod +x minikube
                             minikube_homedir=/usr/local/bin/
-                            
+
                             sudo install minikube /usr/local/bin
 
                             minikube delete
@@ -57,14 +57,10 @@ pipeline{
                         script : 'minikube ip',
                         returnStdout: true
                     ).trim()
-                    
+
                     ocp.pollRouteUntilReady(env.TACKLE_URL,15,30)
                     repo.checkout("https://gitlab.cee.redhat.com/mta-qe/tackle-api-tests-config.git","main")
                     sh "sleep 40s" //Grace period after the application is serving correctly.
-                    env.keycloakAdminPassword = sh(
-                        script: "oc get secret tackle-keycloak-sso -nkonveyor-tackle -o jsonpath='{.data.admin-password}' | base64 -d",
-                        returnStdout: true
-                    ).trim()
                     sh "pipenv run pytest -v --tc-file=$WORKSPACE/tackle-api-tests-config/config.json --tc-format=json"
                 }
             }
