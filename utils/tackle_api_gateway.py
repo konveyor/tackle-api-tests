@@ -1,7 +1,8 @@
 import os
-import pytest
-import swagger_client
+
 from keycloak import KeycloakOpenID
+
+import swagger_client
 
 
 # Borg Pattern
@@ -25,10 +26,9 @@ class TackleClient:
     def get_access_token(self):
         # Configure client if not exist
         if not self.keycloak_openid:
-            self.keycloak_openid = KeycloakOpenID(server_url=f"{self.url}/auth/",
-                                                  client_id=self.client_id,
-                                                  realm_name=self.realm_name,
-                                                  verify=False)
+            self.keycloak_openid = KeycloakOpenID(
+                server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
+            )
         return self.keycloak_openid.token(self.username, self.password)["access_token"]
 
 
@@ -48,6 +48,7 @@ class TackleApiGateway:
     """
     Gateway for API operations.
     """
+
     def __init__(self):
         # swagger api clients
         swagger_api = swagger_client.api
@@ -63,8 +64,8 @@ class TackleApiGateway:
         for cl in self.clients:
             c = cl.api_client.configuration
             c.host = f"{os.environ.get('TACKLE_URL')}/hub"
-            c.api_key_prefix['Authorization'] = 'Bearer'
-            c.api_key['Authorization'] = self.__getattribute__("api_token")
+            c.api_key_prefix["Authorization"] = "Bearer"
+            c.api_key["Authorization"] = self.__getattribute__("api_token")
 
     def refresh_api_token(self):
         """
@@ -72,7 +73,7 @@ class TackleApiGateway:
         """
         for cl in self.clients:
             c = cl.api_client.configuration
-            c.api_key['Authorization'] = self.api_token
+            c.api_key["Authorization"] = self.api_token
 
     @property
     def api_token(self):

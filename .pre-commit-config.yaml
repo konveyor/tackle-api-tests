@@ -1,0 +1,27 @@
+repos:
+  # isort is a tool which will sort and organize all the imports of the project
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1
+    hooks:
+      - id: isort
+        exclude: ^swagger_client/
+
+  # black is a code formatter. It will modify the code to satisfy the code conventions of Python
+  # By default black will split a line which is longer than 80 characters.
+  # Different line length can be configured in pyproject.toml file
+  - repo: https://github.com/psf/black
+    rev: 22.12.0
+    hooks:
+      - id: black
+        exclude: ^swagger_client/
+
+  # flack8 is a code-style checker. It will check the code style upon the PEP 8 style guide
+  # For more flake8 configuration see: .flake8 file
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.0.0
+    hooks:
+      - id: flake8
+
+
+
+

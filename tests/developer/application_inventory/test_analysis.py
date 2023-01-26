@@ -8,4 +8,3 @@ def test_analysis(task_groups, get_api):
         tasks = task_group.tasks
         for task in tasks:
             wait_for(lambda: get_api.tasks_id_get(str(task.id)).state == "Succeeded", delay=5, timeout=120)
-

@@ -1,20 +1,23 @@
 import json
+
 import pytest
-from swagger_client.models import *
+
+from swagger_client.models.api_application import ApiApplication
+from swagger_client.models.api_task_group import ApiTaskGroup
 
 
 @pytest.fixture(scope="session")
 def json_application():
-    with open('data/application.json', 'r') as file:
+    with open("data/application.json", "r") as file:
         yield json.load(file)
 
 
 @pytest.fixture(scope="session")
 def json_analysis():
-    with open('data/analysis.json', 'r') as file:
+    with open("data/analysis.json", "r") as file:
         json_list = json.load(file)
     #  Filter out duplicates
-    return {value['appName']: value for value in json_list}
+    return {value["appName"]: value for value in json_list}
 
 
 @pytest.fixture(scope="session")
@@ -48,10 +51,7 @@ def task_groups(applications, json_analysis, create_api, get_api, update_api):
                     "addon": "windup",
                     "name": f"app{app_id}.{app_id}.windup",
                     "data": {},
-                    "application": {
-                        "id": app_id,
-                        "name": app_name
-                    }
+                    "application": {"id": app_id, "name": app_name},
                 }
             ]
             task_group = ApiTaskGroup(addon="windup", data=data, tasks=tasks)
