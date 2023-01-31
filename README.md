@@ -8,6 +8,9 @@ PR Reviewer :sshveta@redhat.com
 
 Maintained by: mguetta@redhat.com
 
+## Code of Conduct
+Refer to Konveyor's Code of Conduct [here](https://github.com/konveyor/community/blob/main/CODE_OF_CONDUCT.md).
+
 ## Run Tests
 
 ### Using podman or docker (running in a container is recommended)
