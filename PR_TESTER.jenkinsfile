@@ -52,7 +52,11 @@ pipeline{
             }
             steps{
                 script{
-                    sh "pipenv run pip install -r requirements.txt"
+                    //This is a known issue sometimes the virtualenv exists and throws an error. 
+                    sh """
+                    rm -rf \$(pipenv --venv) 
+                    pipenv run pip install -r requirements.txt
+                    """
                     env.TACKLE_URL = "http://"+sh(
                         script : 'minikube ip',
                         returnStdout: true
