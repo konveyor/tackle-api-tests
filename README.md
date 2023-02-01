@@ -13,18 +13,11 @@ Refer to Konveyor's Code of Conduct [here](https://github.com/konveyor/community
 
 ## Run Tests
 
-### Using podman or docker (running in a container is recommended)
+> **_NOTE:_** You should have minikube/Openshift cluster with Tackle installed
+
 ```bash
-podman rm tests-run
-
-podman rmi tackle-api-tests
-
-podman build -f Dockerfile -t tackle-api-tests
-
-podman run -e TACKLE_USER=? -e TACKLE_PASSWORD=? -e TACKLE_URL=http://x.x.x.x tackle-api-tests [PYTEST OPTIONS]
-
-# for example:
-# podman run --name tests-run -e TACKLE_USER=user -e TACKLE_PASSWORD=pass -e TACKLE_URL=https://1.1.1.1 tackle-api-tests -m tags
+git clone https://github.com/konveyor/tackle-api-tests.git
+cd tackle-api-tests
 ```
 
 ### Using Virtual Environment
@@ -46,6 +39,22 @@ export TACKLE_URL=? # including http:// Or https:// and without no closing /
 
 # Run tests which marked with @pytest.mark.analysis
 python3 -m pytest -v -m analysis
+```
+
+### Using Container
+```bash
+# If needed, remove existing container
+podman rm tests-run
+
+# If needed, remove locally stored image
+podman rmi tackle-api-tests
+
+podman build -f Dockerfile -t tackle-api-tests
+
+podman run --name tests-run -e TACKLE_USER=? -e TACKLE_PASSWORD=? -e TACKLE_URL=http://x.x.x.x tackle-api-tests [PYTEST OPTIONS]
+
+# for example:
+# podman run --name tests-run -e TACKLE_USER=user -e TACKLE_PASSWORD=pass -e TACKLE_URL=https://1.1.1.1 tackle-api-tests -m tags
 ```
 
 ## Utils
