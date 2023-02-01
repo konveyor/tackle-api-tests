@@ -20,7 +20,11 @@ git clone https://github.com/konveyor/tackle-api-tests.git
 cd tackle-api-tests
 ```
 
-### Using Virtual Environment
+### Edit the Config File
+Before running the tests, you need to edit the `config.json` file, located in the root directory of the project.
+* Modify the `cred_git_username` and `cred_git_token` which are needed to create credentials.
+
+### Run Tests Using Virtual Environment
 ```bash
 # Create the Virtual Environment
 python3 -m venv ./venv/
@@ -38,10 +42,10 @@ export TACKLE_PASSWORD=?
 export TACKLE_URL=? # including http:// Or https:// and without no closing /
 
 # Run tests which marked with @pytest.mark.analysis
-python3 -m pytest -v -m analysis
+python3 -m pytest -v --tc-file=config.json --tc-format=json -m analysis
 ```
 
-### Using Container
+### Run Tests Using Container
 ```bash
 # If needed, remove existing container
 podman rm tests-run
@@ -59,13 +63,13 @@ podman run --name tests-run -e TACKLE_USER=? -e TACKLE_PASSWORD=? -e TACKLE_URL=
 
 ## Utils
 
-### Get keycloak API token
+### Get Keycloak API Token
 ```bash
 python3 utils/get-token.py --user=? --password=? --host=?
 # Note: host (tackle url) should include http:// Or https:// without no closing /
 ```
 
-## Generate swagger_client library
+## Generate swagger_client Library
 1. Download current stable 2.x.x swagger-codegen-cli tool
     ```bash
     # Download current stable 2.x.x branch (Swagger and OpenAPI version 2)
