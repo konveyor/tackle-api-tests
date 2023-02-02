@@ -8,13 +8,13 @@ from swagger_client.models.api_task_group import ApiTaskGroup
 
 @pytest.fixture(scope="session")
 def json_application():
-    with open("data/application.json", "r") as file:
+    with open("mta/data/application.json", "r") as file:
         yield json.load(file)
 
 
 @pytest.fixture(scope="session")
 def json_analysis():
-    with open("data/analysis.json", "r") as file:
+    with open("mta/data/analysis.json", "r") as file:
         json_list = json.load(file)
     #  Filter out duplicates
     return {value["app_name"]: value for value in json_list}

@@ -4,10 +4,15 @@ import pytest
 
 # project root conftest.py
 
-pytest_plugins = ["fixtures.apis", "fixtures.application_inventory", "fixtures.credentials", "fixtures.tags"]
+pytest_plugins = [
+    "mta.fixtures.apis",
+    "mta.fixtures.application_inventory",
+    "mta.fixtures.credentials",
+    "mta.fixtures.tags",
+]
 
 
 @pytest.fixture(scope="session")
 def json_defaults():
-    with open("data/defaults.json", "r") as file:
+    with open("mta/data/defaults.json", "r") as file:
         yield json.load(file)
