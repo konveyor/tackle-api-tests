@@ -1,6 +1,6 @@
 import pytest
 
-from utils.tackle_api_gateway import TackleApiGateway
+from mta.utils.tackle_api_gateway import TackleApiGateway
 
 tackle_api_gateway = TackleApiGateway()
 

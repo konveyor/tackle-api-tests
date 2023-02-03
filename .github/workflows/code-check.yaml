@@ -1,9 +1,9 @@
-name: Code check
+name: Pull request check
 run-name: Check code of pull request created by @${{ github.actor }}
 on: [pull_request]
 
 jobs:
-  check-code:
+  code-check:
     runs-on: ubuntu-latest
     strategy:
       matrix:
