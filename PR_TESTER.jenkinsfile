@@ -1,4 +1,11 @@
 @Library('migrationqe-automation-lib') _
+def getChangedFilesList() {
+    ArrayList<String> changedFiles = new ArrayList<String>()
+    changedFiles = sh(script:"git diff HEAD..HEAD~1 --name-only",
+    returnStdout:true).split('\n')
+    return changedFiles
+}
+
 pipeline{
     agent {
         label 'minikube-node' 
@@ -7,15 +14,42 @@ pipeline{
         TACKLE_USER = "admin"
         TACKLE_PASSWORD = "Passw0rd!"
     }
+    
     stages{
-        stage('Install & run minikube'){
+        stage("Check if their are changed tests"){
             when{
-                branch pattern: '^PR-.*$',
-                comparator: 'REGEXP'
+                allOf{
+                    branch pattern: '^PR-.*$',
+                    comparator: 'REGEXP';
+                    expression{
+                    getChangedFilesList().any { it=~ /^.*tests\/.*test_.*$/} == true
+                    }
+                }
             }
             steps{
                 script{
                     checkout scm
+                    env.RUN_TESTS = "true" 
+                    changed_test_list = [] 
+                    getChangedFilesList().each{
+                        i ->
+                        if(i.contains("test_")){
+                            changed_test_list.add(i)
+                        }
+                    }
+                    env.CHANGED_TEST_FILES = changed_test_list.join(" ")
+                }
+            }
+        }
+        stage('Install & run minikube'){
+            when {  
+                expression{
+                    env.RUN_TESTS == "true"
+                }
+            }   
+            steps{
+                script{
+                    
                     sh """ curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
                             chmod +x minikube
                             minikube_homedir=/usr/local/bin/
@@ -46,10 +80,11 @@ pipeline{
             }
         }
         stage('Run tackle api tests'){
-            when{
-                branch pattern: '^PR-.*$',
-                comparator: 'REGEXP'
-            }
+           when { 
+                expression{
+                    env.RUN_TESTS == "true"
+                }
+            }   
             steps{
                 script{
                     //This is a known issue sometimes the virtualenv exists and throws an error. 
@@ -65,7 +100,7 @@ pipeline{
                     ocp.pollRouteUntilReady(env.TACKLE_URL,15,30)
                     repo.checkout("https://gitlab.cee.redhat.com/mta-qe/tackle-api-tests-config.git","main")
                     sh "sleep 40s" //Grace period after the application is serving correctly.
-                    sh "pipenv run pytest -v --tc-file=$WORKSPACE/tackle-api-tests-config/config.json --tc-format=json"
+                    sh "pipenv run pytest -v ${CHANGED_TEST_FILES} --tc-file=$WORKSPACE/tackle-api-tests-config/config.json --tc-format=json"
                 }
             }
         }
