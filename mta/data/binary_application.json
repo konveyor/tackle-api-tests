@@ -1,0 +1,8 @@
+[
+  {
+    "name": "binary-tackle-testapp",
+    "identities": [],
+    "binary": "io.konveyor.demo:customers-tomcat:0.0.1-SNAPSHOT:war"
+  }
+]
+

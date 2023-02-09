@@ -1,16 +1,32 @@
 [
   {
     "app_name": "book-server",
-    "targets": [
-      "cloud-readiness"
-    ],
+    "data": {
+      "targets": [
+        "cloud-readiness"
+      ]
+    },
     "story_points": 5
   },
   {
     "app_name": "tackle-testapp",
-    "targets": [
-      "cloud-readiness"
-    ],
+    "data": {
+      "targets": [
+        "cloud-readiness"
+      ]
+    },
     "story_points": 1
+  },
+  {
+    "app_name": "binary-tackle-testapp",
+    "data": {
+      "mode": {
+        "binary": true
+      },
+      "target": [
+        "cloud-readiness"
+      ]
+    },
+    "storyPoints": 2
   }
 ]
