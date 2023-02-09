@@ -1,10 +1,16 @@
 from contextlib import contextmanager
 from xml.etree import ElementTree as ET
 
+import fauxfactory
 import pytest
 from pytest_testconfig import config
 
 from swagger_client.models.api_identity import ApiIdentity
+
+
+def generate_credential_name(length=20, start=None, separator="-"):
+    """Generate a random credential name."""
+    return fauxfactory.gen_alphanumeric(length=length, start=start + "-creds", separator=separator)
 
 
 @contextmanager
@@ -18,7 +24,7 @@ def create_credentials(credential_data, create_api, delete_api):
 @pytest.fixture(scope="session")
 def source_username_credentials(create_api, delete_api):
     credential_data = {
-        "name": config.get("cred_git_name"),
+        "name": generate_credential_name(start="source-git"),
         "kind": "source",
         "password": config.get("cred_git_token"),
         "user": config.get("cred_git_username"),
@@ -55,7 +61,7 @@ def xml_maven_settings():
 
 @pytest.fixture(scope="session")
 def maven_credential(xml_maven_settings, create_api, delete_api):
-    credential_data = {"name": config.get("cred_maven_name"), "kind": "maven", "settings": xml_maven_settings}
+    credential_data = {"name": generate_credential_name(start="maven"), "kind": "maven", "settings": xml_maven_settings}
     with create_credentials(
         credential_data=credential_data, create_api=create_api, delete_api=delete_api
     ) as maven_creds:

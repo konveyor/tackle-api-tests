@@ -22,7 +22,9 @@ cd tackle-api-tests
 
 ### Edit the Config File
 Before running the tests, you need to edit the `config.json` file, located in the root directory of the project.
-* Modify the `cred_git_username` and `cred_git_token` which are needed to create credentials.
+* Provide your GitHub user and token as `cred_git_username` and `cred_git_token` which are needed to create credentials and run analysis.
+
+> **_NOTE:_** You should use a GitHub username that has read permissions to [Test Application for Tackle](https://github.com/konveyor/tackle-testapp)
 
 ### Run Tests Using Virtual Environment
 ```bash
