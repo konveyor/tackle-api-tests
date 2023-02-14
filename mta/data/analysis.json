@@ -28,5 +28,18 @@
       ]
     },
     "storyPoints": 2
+  },
+  {
+    "app_name": "src-bin-tackle-testapp",
+    "data": {
+      "mode": {
+        "withDeps": true
+      },
+      "target": [
+        "cloud-readiness",
+        "jakarta-ee"
+      ]
+    },
+    "storyPoints": 1
   }
 ]

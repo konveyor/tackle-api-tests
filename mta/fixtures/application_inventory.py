@@ -20,6 +20,12 @@ def binary_applications_data():
 
 
 @pytest.fixture(scope="session")
+def src_bin_applications_data():
+    with open("mta/data/source_binary_application.json", "r") as file:
+        yield json.load(file)
+
+
+@pytest.fixture(scope="session")
 def json_analysis():
     with open("mta/data/analysis.json", "r") as file:
         json_list = json.load(file)
@@ -55,6 +61,17 @@ def binary_applications(binary_applications_data, maven_credential, create_api, 
     creds = [maven_credential.to_dict()]
     with create_applications(
         create_api=create_api, delete_api=delete_api, applications_data=binary_applications_data, credentials=creds
+    ) as binary_apps:
+        yield binary_apps
+
+
+@pytest.fixture(scope="session")
+def source_binary_apps(
+    src_bin_applications_data, source_username_credentials, maven_credential, create_api, delete_api
+):
+    creds = [source_username_credentials.to_dict(), maven_credential.to_dict()]
+    with create_applications(
+        create_api=create_api, delete_api=delete_api, applications_data=src_bin_applications_data, credentials=creds
     ) as binary_apps:
         yield binary_apps
 
