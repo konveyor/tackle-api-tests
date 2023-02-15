@@ -28,9 +28,7 @@ def src_bin_applications_data():
 @pytest.fixture(scope="session")
 def json_analysis():
     with open("mta/data/analysis.json", "r") as file:
-        json_list = json.load(file)
-    #  Filter out duplicates
-    return {value["app_name"]: value for value in json_list}
+        return json.load(file)
 
 
 @contextmanager
@@ -85,10 +83,10 @@ def tasks(request, json_analysis, create_api, get_api, update_api):
         app_name = app.name
         if app_name in json_analysis:
             analysis_data = json_analysis[app_name]
-            data = analysis_data["data"]
-            data["output"] = "/windup/report"
+            task_data = analysis_data["data"]
+            task_data["output"] = "/windup/report"
             application = {"id": app_id, "name": app_name}
-            task = ApiTask(addon="windup", application=application, data=data)
+            task = ApiTask(addon="windup", application=application, data=task_data)
             new_task = create_api.tasks_post(task=task.to_dict())
             update_api.tasks_id_submit_put(id=new_task.id, task=new_task)
             tasks_from_db.append(get_api.tasks_id_get(new_task.id))

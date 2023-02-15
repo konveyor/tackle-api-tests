@@ -1,6 +1,5 @@
-[
-  {
-    "app_name": "book-server",
+{
+  "book-server": {
     "data": {
       "targets": [
         "cloud-readiness"
@@ -8,8 +7,7 @@
     },
     "story_points": 5
   },
-  {
-    "app_name": "tackle-testapp",
+  "tackle-testapp": {
     "data": {
       "targets": [
         "cloud-readiness"
@@ -17,8 +15,7 @@
     },
     "story_points": 1
   },
-  {
-    "app_name": "binary-tackle-testapp",
+  "binary-tackle-testapp": {
     "data": {
       "mode": {
         "binary": true
@@ -29,8 +26,7 @@
     },
     "storyPoints": 2
   },
-  {
-    "app_name": "src-bin-tackle-testapp",
+  "src-bin-tackle-testapp": {
     "data": {
       "mode": {
         "withDeps": true
@@ -42,4 +38,4 @@
     },
     "storyPoints": 1
   }
-]
+}
