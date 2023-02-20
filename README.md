@@ -67,7 +67,8 @@ podman run --name tests-run -e TACKLE_USER=? -e TACKLE_PASSWORD=? -e TACKLE_URL=
 
 ### Get Keycloak API Token
 ```bash
-python3 utils/get-token.py --user=? --password=? --host=?
+cd tackle-api-tests
+python3 mta/utils/get-token.py --user=? --password=? --host=?
 # Note: host (tackle url) should include http:// Or https:// without no closing /
 ```
 
