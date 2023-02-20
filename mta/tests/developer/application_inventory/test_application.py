@@ -1,7 +1,6 @@
 import pytest
 
 
-@pytest.mark.xfail  # TODO: Remove once related bug is fixed, Jira: TACKLE-905
 @pytest.mark.app
 def test_create_app(applications, get_api):
     for app in applications:
