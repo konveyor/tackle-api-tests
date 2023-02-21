@@ -3,7 +3,7 @@ import json
 import pytest
 
 from swagger_client.models.api_application import ApiApplication
-from swagger_client.models.api_task_group import ApiTaskGroup
+from swagger_client.models.api_task import ApiTask
 
 
 @pytest.fixture(scope="session")
@@ -13,11 +13,9 @@ def json_application():
 
 
 @pytest.fixture(scope="session")
-def json_analysis():
+def analyses_data():
     with open("mta/data/analysis.json", "r") as file:
-        json_list = json.load(file)
-    #  Filter out duplicates
-    return {value["app_name"]: value for value in json_list}
+        return json.load(file)
 
 
 @pytest.fixture(scope="session")
@@ -38,24 +36,17 @@ def applications(source_username_credentials, json_application, create_api, dele
 
 
 @pytest.fixture()
-def task_groups(applications, json_analysis, create_api, get_api, update_api):
-    tg_from_db = []
+def tasks(applications, analyses_data, create_api, get_api, update_api):
+    tasks_from_db = []
     for app in applications:
         app_id = app.id
         app_name = app.name
-        if app_name in json_analysis:
-            analysis_data = json_analysis[app_name]
-            data = {"targets": analysis_data["targets"], "output": "/windup/report"}
-            tasks = [
-                {
-                    "addon": "windup",
-                    "name": f"app{app_id}.{app_id}.windup",
-                    "data": {},
-                    "application": {"id": app_id, "name": app_name},
-                }
-            ]
-            task_group = ApiTaskGroup(addon="windup", data=data, tasks=tasks)
-            new_taskgroup = create_api.taskgroups_post(taskgroup=task_group.to_dict())
-            update_api.taskgroups_id_submit_put(id=new_taskgroup.id, taskgroup=new_taskgroup)
-            tg_from_db.append(get_api.taskgroups_id_get(new_taskgroup.id))
-    return tg_from_db
+        if app_name in analyses_data:
+            analysis_info = analyses_data[app_name]
+            task_data = {"targets": analysis_info["targets"], "output": "/windup/report"}
+            application = {"id": app_id, "name": app_name}
+            task = ApiTask(addon="windup", application=application, data=task_data)
+            new_task = create_api.tasks_post(task=task.to_dict())
+            update_api.tasks_id_submit_put(id=new_task.id, task=new_task)
+            tasks_from_db.append(get_api.tasks_id_get(new_task.id))
+    return tasks_from_db
