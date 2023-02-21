@@ -13,11 +13,9 @@ def json_application():
 
 
 @pytest.fixture(scope="session")
-def json_analysis():
+def analyses_data():
     with open("mta/data/analysis.json", "r") as file:
-        json_list = json.load(file)
-    #  Filter out duplicates
-    return {value["app_name"]: value for value in json_list}
+        return json.load(file)
 
 
 @pytest.fixture(scope="session")
@@ -38,14 +36,14 @@ def applications(source_username_credentials, json_application, create_api, dele
 
 
 @pytest.fixture()
-def tasks(applications, json_analysis, create_api, get_api, update_api):
+def tasks(applications, analyses_data, create_api, get_api, update_api):
     tasks_from_db = []
     for app in applications:
         app_id = app.id
         app_name = app.name
-        if app_name in json_analysis:
-            analysis_data = json_analysis[app_name]
-            task_data = {"targets": analysis_data["targets"], "output": "/windup/report"}
+        if app_name in analyses_data:
+            analysis_info = analyses_data[app_name]
+            task_data = {"targets": analysis_info["targets"], "output": "/windup/report"}
             application = {"id": app_id, "name": app_name}
             task = ApiTask(addon="windup", application=application, data=task_data)
             new_task = create_api.tasks_post(task=task.to_dict())
