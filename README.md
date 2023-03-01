@@ -41,7 +41,7 @@ export TACKLE_USER=?
 
 export TACKLE_PASSWORD=?
 
-export TACKLE_URL=? # including http:// Or https:// and without no closing /
+export TACKLE_URL=? # including http:// Or https:// and without closing /
 
 # Run tests which marked with @pytest.mark.analysis
 python3 -m pytest -v --tc-file=config.json --tc-format=json -m analysis
@@ -68,8 +68,16 @@ podman run --name tests-run -e TACKLE_USER=? -e TACKLE_PASSWORD=? -e TACKLE_URL=
 ### Get Keycloak API Token
 ```bash
 cd tackle-api-tests
-python3 mta/utils/get-token.py --user=? --password=? --host=?
-# Note: host (tackle url) should include http:// Or https:// without no closing /
+
+export PYTHONPATH=$(pwd):$PYTHONPATH
+
+export TACKLE_USER=?
+
+export TACKLE_PASSWORD=?
+
+export TACKLE_URL=? # including http:// Or https:// and without closing /
+
+python3 mta/utils/get-token.py
 ```
 
 ## Generate swagger_client Library

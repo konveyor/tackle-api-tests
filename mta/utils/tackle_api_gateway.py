@@ -1,4 +1,5 @@
 import os
+from urllib.parse import urlparse
 
 from keycloak import KeycloakOpenID
 
@@ -13,22 +14,25 @@ class TackleClient:
     def __init__(self):
         if not TackleClient.__shared_state:
             TackleClient.__shared_state = self.__dict__
-            self.realm_name = "tackle"
-            self.client_id = "tackle-ui"
-            self.url = os.environ.get("TACKLE_URL")
             self.username = os.environ.get("TACKLE_USER")
             self.password = os.environ.get("TACKLE_PASSWORD")
-            self.keycloak_openid = None
+            self.url = os.environ.get("TACKLE_URL")
+
+            parsed_url = urlparse(self.url)
+            if parsed_url.netloc.startswith("mta"):
+                self.realm_name = "mta"
+                self.client_id = "mta-ui"
+            else:
+                self.realm_name = "tackle"
+                self.client_id = "tackle-ui"
+            self.keycloak_openid = KeycloakOpenID(
+                server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
+            )
 
         else:
             self.__dict__ = TackleClient.__shared_state
 
     def get_access_token(self):
-        # Configure client if not exist
-        if not self.keycloak_openid:
-            self.keycloak_openid = KeycloakOpenID(
-                server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
-            )
         return self.keycloak_openid.token(self.username, self.password)["access_token"]
 
 
