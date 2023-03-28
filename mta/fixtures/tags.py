@@ -2,15 +2,15 @@ import pytest
 
 
 @pytest.fixture()
-def tag_types_names(get_api):
+def tagcategories_names(get_api):
     # Note: tag type name is unique
-    return {tag_type.name for tag_type in get_api.tagtypes_get()}
+    return {tag_category.name for tag_category in get_api.tagcategories_get()}
 
 
 @pytest.fixture()
-def tag_types_ids(get_api):
+def tagcategories_ids(get_api):
     # Note: tag type ID is unique
-    return {tag_type.id for tag_type in get_api.tagtypes_get()}
+    return {tag_category.id for tag_category in get_api.tagcategories_get()}
 
 
 @pytest.fixture()
