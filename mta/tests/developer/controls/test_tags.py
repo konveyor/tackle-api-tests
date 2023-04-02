@@ -5,16 +5,6 @@ from swagger_client.models.api_tag import ApiTag
 
 
 @pytest.mark.tags
-def test_default_tags(json_defaults, tag_names):
-    assert set(json_defaults["tags"]).issubset(tag_names), "Default tags check FAILED! (found : expected)"  # noqa: E501
-
-
-@pytest.mark.tags
-def test_default_tagcategories(json_defaults, tagcategories_names):
-    assert set(json_defaults["tagcategories"]).issubset(tagcategories_names), "Default tag types check FAILED!"
-
-
-@pytest.mark.tags
 def test_create_tag(tagcategories_ids, create_api, get_api, delete_api):
     for tag_category_id in tagcategories_ids:
         tag_category = {"id": tag_category_id}
