@@ -33,7 +33,8 @@ class TackleClient:
             self.__dict__ = TackleClient.__shared_state
 
     def get_access_token(self):
-        return self.keycloak_openid.token(self.username, self.password)["access_token"]
+        if self.realm_name == "mta":
+            return self.keycloak_openid.token(self.username, self.password)["access_token"]
 
 
 def api_call(function):
