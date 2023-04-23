@@ -1,13 +1,24 @@
 import pytest
 from wait_for import wait_for
 
-from mta.fixtures.application_inventory import json_application
+from mta.fixtures.application_inventory import json_analysis, json_application
 from swagger_client.models.api_task import ApiTask
 
 
 @pytest.mark.parametrize("application", json_application(), indirect=True)
+@pytest.mark.parametrize("analysis_item", json_analysis(), ids=[item.get("source") for item in json_analysis()])
 @pytest.mark.analysis
 def test_analysis(application, analysis_item, create_api, get_api, update_api):
+    """
+    This function uses functions to provide input parameters representing an application for analysis and an analysis
+    item to be run on the application. The function starts by checking if the app and analysis item match by comparing
+    their names. If they do not match, the test is skipped.
+
+    If the app and analysis item match, a new task is created for the analysis to be run.
+    The function waits for the task to complete by periodically checking its state until the state changes to
+    "Succeeded".
+    """
+
     app = application
     analysis_info = analysis_item
     if app.name != analysis_info["app_name"]:

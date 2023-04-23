@@ -20,12 +20,6 @@ def json_analysis():
         return json.load(file)
 
 
-@pytest.fixture(params=json_analysis(), ids=[item.get("source") for item in json_analysis()])
-def analysis_item(request):
-    # Fixture that returns each analysis_item from the list of analysis.json
-    return request.param
-
-
 @pytest.fixture(scope="session")
 def application(source_username_credentials, applications_data, create_api, delete_api, request):
     app_name = request.param
