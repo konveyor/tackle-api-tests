@@ -7,7 +7,7 @@ from swagger_client.models.api_task import ApiTask
 
 @pytest.mark.parametrize("application", json_application(), indirect=True)
 @pytest.mark.analysis
-def test_source_analysis(application, analysis_item, create_api, get_api, update_api):
+def test_analysis(application, analysis_item, create_api, get_api, update_api):
     app = application
     analysis_info = analysis_item
     if app.name != analysis_info["app_name"]:

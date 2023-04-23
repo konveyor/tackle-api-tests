@@ -20,7 +20,7 @@ def json_analysis():
         return json.load(file)
 
 
-@pytest.fixture(params=json_analysis(), ids=[f"{item.get('source')}-analysis_item" for item in json_analysis()])
+@pytest.fixture(params=json_analysis(), ids=[item.get("source") for item in json_analysis()])
 def analysis_item(request):
     # Fixture that returns each analysis_item from the list of analysis.json
     return request.param
