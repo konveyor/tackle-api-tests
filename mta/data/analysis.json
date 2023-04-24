@@ -1,14 +1,18 @@
-{
-  "book-server": {
+[
+  {
+    "app_name": "book-server",
+    "source": "source_code",
     "targets": [
       "cloud-readiness"
     ],
     "story_points": 5
   },
-  "tackle-testapp": {
+  {
+    "app_name": "tackle-testapp",
+    "source": "source_code",
     "targets": [
       "cloud-readiness"
     ],
     "story_points": 1
   }
-}
+]
