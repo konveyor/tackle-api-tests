@@ -4,15 +4,34 @@
     "source": "source_code",
     "targets": [
       "cloud-readiness"
-    ],
-    "story_points": 5
+    ]
   },
   {
     "app_name": "tackle-testapp",
     "source": "source_code",
     "targets": [
       "cloud-readiness"
-    ],
-    "story_points": 1
+    ]
+  },
+  {
+    "app_name": "tackle-testapp",
+    "source": "binary",
+    "mode": {
+      "binary": true
+      },
+    "targets": [
+      "cloud-readiness"
+    ]
+  },
+  {
+    "app_name": "tackle-testapp",
+    "source": "source_and_deps",
+    "mode": {
+      "withDeps": true
+      },
+    "targets": [
+      "cloud-readiness",
+      "jakarta-ee"
+    ]
   }
 ]

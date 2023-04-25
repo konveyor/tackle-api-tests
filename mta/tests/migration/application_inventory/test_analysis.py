@@ -23,7 +23,7 @@ def test_analysis(application, analysis_item, create_api, get_api, update_api):
     analysis_info = analysis_item
     if app.name != analysis_info["app_name"]:
         pytest.skip("The analysis item should not run using the current app. Skipping test")
-    task_data = {"targets": analysis_info["targets"], "output": "/windup/report"}
+    task_data = {"mode": analysis_info.get("mode"), "targets": analysis_info.get("targets"), "output": "/windup/report"}
     api_task = ApiTask(addon="windup", application={"id": app.id, "name": app.name}, data=task_data)
     new_task = create_api.tasks_post(task=api_task.to_dict())
 
