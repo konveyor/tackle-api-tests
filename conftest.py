@@ -8,6 +8,8 @@ pytest_plugins = [
     "mta.fixtures.tags",
     "mta.fixtures.stakeholder",
     "mta.fixtures.business_service",
+    "mta.fixtures.stakeholder_group",
+    "mta.fixtures.job_function",
 ]
 
 

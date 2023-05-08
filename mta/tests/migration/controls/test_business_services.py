@@ -21,7 +21,3 @@ def test_business_service_crud(business_service, stakeholder, get_api, delete_ap
     check.equal(update_business_service_from_db.name, business_service.name)
     # Assertion checking for the updated business services's description
     check.equal(update_business_service_from_db.description, business_service.description)
-
-    # Delete the BS and Stakeholder
-    delete_api.businessservices_id_delete(str(business_service.id))
-    delete_api.stakeholders_id_delete(str(stakeholder.id))
