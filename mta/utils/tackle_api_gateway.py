@@ -8,12 +8,12 @@ import swagger_client
 
 # Borg Pattern
 # https://github.com/faif/python-patterns/blob/master/patterns/creational/borg.py
-class TackleClient:
+class KeycloakClient:
     __shared_state = {}
 
     def __init__(self):
-        if not TackleClient.__shared_state:
-            TackleClient.__shared_state = self.__dict__
+        if not KeycloakClient.__shared_state:
+            KeycloakClient.__shared_state = self.__dict__
             self.username = os.environ.get("TACKLE_USER")
             self.password = os.environ.get("TACKLE_PASSWORD")
             self.url = os.environ.get("TACKLE_URL")
@@ -30,7 +30,7 @@ class TackleClient:
                 self.client_id = "tackle-ui"
 
         else:
-            self.__dict__ = TackleClient.__shared_state
+            self.__dict__ = KeycloakClient.__shared_state
 
     def get_access_token(self):
         if self.realm_name == "mta":
@@ -50,7 +50,6 @@ class TackleApiGateway:
         self.clients["create_api"] = swagger_api.create_api.CreateApi()
         self.clients["delete_api"] = swagger_api.delete_api.DeleteApi()
         self.clients["update_api"] = swagger_api.update_api.UpdateApi()
-        self.tackle_client = TackleClient()
 
         # common config
         api_token = self.api_token
@@ -65,4 +64,5 @@ class TackleApiGateway:
         """
         Get an API token by sending authentication request to keycloak.
         """
-        return self.tackle_client.get_access_token()
+        keycloak_client = KeycloakClient()
+        return keycloak_client.get_access_token()
