@@ -22,12 +22,12 @@ class TackleClient:
             if parsed_url.netloc.startswith("mta"):
                 self.realm_name = "mta"
                 self.client_id = "mta-ui"
+                self.keycloak_openid = KeycloakOpenID(
+                    server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
+                )
             else:
                 self.realm_name = "tackle"
                 self.client_id = "tackle-ui"
-            self.keycloak_openid = KeycloakOpenID(
-                server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
-            )
 
         else:
             self.__dict__ = TackleClient.__shared_state
@@ -35,18 +35,6 @@ class TackleClient:
     def get_access_token(self):
         if self.realm_name == "mta":
             return self.keycloak_openid.token(self.username, self.password)["access_token"]
-
-
-def api_call(function):
-    """
-    Decorator for api calls.
-    """
-
-    def wrapper(*args):
-        args[0].refresh_api_token()
-        return function(*args)
-
-    return wrapper
 
 
 class TackleApiGateway:
@@ -57,33 +45,24 @@ class TackleApiGateway:
     def __init__(self):
         # swagger api clients
         swagger_api = swagger_client.api
-        self.clients = []
-        self.get_api = swagger_api.get_api.GetApi()
-        self.create_api = swagger_api.create_api.CreateApi()
-        self.delete_api = swagger_api.delete_api.DeleteApi()
-        self.update_api = swagger_api.update_api.UpdateApi()
-        self.clients.extend([self.get_api, self.create_api, self.delete_api, self.update_api])  # noqa: E501
+        self.clients = {}
+        self.clients["get_api"] = swagger_api.get_api.GetApi()
+        self.clients["create_api"] = swagger_api.create_api.CreateApi()
+        self.clients["delete_api"] = swagger_api.delete_api.DeleteApi()
+        self.clients["update_api"] = swagger_api.update_api.UpdateApi()
         self.tackle_client = TackleClient()
 
         # common config
-        for cl in self.clients:
+        api_token = self.api_token
+        for cl in self.clients.values():
             c = cl.api_client.configuration
             c.host = f"{os.environ.get('TACKLE_URL')}/hub"
             c.api_key_prefix["Authorization"] = "Bearer"
-            c.api_key["Authorization"] = self.__getattribute__("api_token")
-
-    def refresh_api_token(self):
-        """
-        Refresh the API Token and update all clients.
-        """
-        for cl in self.clients:
-            c = cl.api_client.configuration
-            c.api_key["Authorization"] = self.api_token
+            c.api_key["Authorization"] = api_token
 
     @property
     def api_token(self):
         """
-        Get a Refreshed API token by sending another authentication request to keycloak.
+        Get an API token by sending authentication request to keycloak.
         """
-        t = TackleClient()
-        return t.get_access_token()
+        return self.tackle_client.get_access_token()
