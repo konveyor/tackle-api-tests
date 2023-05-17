@@ -1,5 +1,5 @@
-from tackle_api_gateway import TackleClient
+from tackle_api_gateway import KeycloakClient
 
 if __name__ == "__main__":
-    tackle_client = TackleClient()
-    print(f"Bearer {tackle_client.get_access_token()}")
+    keycloak_client = KeycloakClient()
+    print(f"Bearer {keycloak_client.get_access_token()}")
