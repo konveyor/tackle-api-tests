@@ -16,6 +16,11 @@ def applications_api():
 
 
 @pytest.fixture(scope="session")
+def tasks_api():
+    return tackle_api_gateway.clients.get("TasksApi")
+
+
+@pytest.fixture(scope="session")
 def get_api():
     return tackle_api_gateway.clients.get("get_api")
 
