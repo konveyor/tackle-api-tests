@@ -6,6 +6,11 @@ tackle_api_gateway = TackleApiGateway()
 
 
 @pytest.fixture(scope="session")
+def identities_api():
+    return tackle_api_gateway.clients.get("IdentitiesApi")
+
+
+@pytest.fixture(scope="session")
 def get_api():
     return tackle_api_gateway.clients.get("get_api")
 
