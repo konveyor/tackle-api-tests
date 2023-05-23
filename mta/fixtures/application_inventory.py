@@ -21,12 +21,12 @@ def json_analysis():
 
 
 @pytest.fixture(scope="session")
-def application(applications_data, source_username_credentials, maven_credential, create_api, delete_api, request):
+def application(applications_data, source_username_credentials, maven_credential, applications_api, request):
     app_name = request.param
     app_data = applications_data[app_name]
     if "identities" in app_data:
         app_data["identities"] = [{"id": source_username_credentials.id}, {"id": maven_credential.id}]
     api_app = ApiApplication(**app_data)
-    new_app = create_api.applications_post(api_app.to_dict())
+    new_app = applications_api.applications_post(api_app.to_dict())
     yield new_app
-    delete_api.applications_id_delete(new_app.id)
+    applications_api.applications_id_delete(new_app.id)
