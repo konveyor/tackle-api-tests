@@ -1,3 +1,5 @@
+import importlib
+import inspect
 import os
 from urllib.parse import urlparse
 
@@ -43,13 +45,18 @@ class TackleApiGateway:
     """
 
     def __init__(self):
-        # swagger api clients
-        swagger_api = swagger_client.api
+        # Import the swagger_client.api module
+        module = importlib.import_module(swagger_client.api.__name__)
+
+        # Create an empty dictionary to store the classes and their instances
         self.clients = {}
-        self.clients["get_api"] = swagger_api.get_api.GetApi()
-        self.clients["create_api"] = swagger_api.create_api.CreateApi()
-        self.clients["delete_api"] = swagger_api.delete_api.DeleteApi()
-        self.clients["update_api"] = swagger_api.update_api.UpdateApi()
+
+        # Iterate over all members of the module
+        for name, obj in inspect.getmembers(module):
+            # Check if the member is a class
+            if inspect.isclass(obj):
+                # Add the class to the dictionary
+                self.clients[name] = obj()
 
         # common config
         api_token = self.api_token
