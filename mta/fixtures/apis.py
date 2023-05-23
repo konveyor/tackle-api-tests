@@ -11,6 +11,46 @@ def identities_api():
 
 
 @pytest.fixture(scope="session")
+def applications_api():
+    return tackle_api_gateway.clients.get("ApplicationsApi")
+
+
+@pytest.fixture(scope="session")
+def tasks_api():
+    return tackle_api_gateway.clients.get("TasksApi")
+
+
+@pytest.fixture(scope="session")
+def stakeholders_api():
+    return tackle_api_gateway.clients.get("StakeholdersApi")
+
+
+@pytest.fixture(scope="session")
+def stakeholdergroups_api():
+    return tackle_api_gateway.clients.get("StakeholdergroupsApi")
+
+
+@pytest.fixture(scope="session")
+def businessservices_api():
+    return tackle_api_gateway.clients.get("BusinessservicesApi")
+
+
+@pytest.fixture(scope="session")
+def tags_api():
+    return tackle_api_gateway.clients.get("TagsApi")
+
+
+@pytest.fixture(scope="session")
+def tagcategories_api():
+    return tackle_api_gateway.clients.get("TagcategoriesApi")
+
+
+@pytest.fixture(scope="session")
+def jobfunctions_api():
+    return tackle_api_gateway.clients.get("JobfunctionsApi")
+
+
+@pytest.fixture(scope="session")
 def get_api():
     return tackle_api_gateway.clients.get("get_api")
 
