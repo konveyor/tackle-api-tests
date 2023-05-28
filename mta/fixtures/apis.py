@@ -50,26 +50,6 @@ def jobfunctions_api():
     return tackle_api_gateway.clients.get("JobfunctionsApi")
 
 
-@pytest.fixture(scope="session")
-def get_api():
-    return tackle_api_gateway.clients.get("get_api")
-
-
-@pytest.fixture(scope="session")
-def create_api():
-    return tackle_api_gateway.clients.get("create_api")
-
-
-@pytest.fixture(scope="session")
-def delete_api():
-    return tackle_api_gateway.clients.get("delete_api")
-
-
-@pytest.fixture(scope="session")
-def update_api():
-    return tackle_api_gateway.clients.get("update_api")
-
-
 @pytest.fixture(autouse=True)
 def refresh_token():
     """
