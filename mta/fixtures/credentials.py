@@ -1,37 +1,30 @@
 from contextlib import contextmanager
 from xml.etree import ElementTree as ET
 
-import fauxfactory
 import pytest
 from pytest_testconfig import config
 
+from conftest import generate_string
 from swagger_client.models.api_identity import ApiIdentity
 
 
-def generate_credential_name(length=20, start=None, separator="-"):
-    """Generate a random credential name."""
-    return fauxfactory.gen_alphanumeric(length=length, start=start + "-creds", separator=separator)
-
-
 @contextmanager
-def create_credentials(credential_data, create_api, delete_api):
+def create_credentials(credential_data, identities_api):
     api_identity = ApiIdentity(**credential_data)
-    new_cred = create_api.identities_post(api_identity.to_dict())
+    new_cred = identities_api.identities_post(api_identity.to_dict())
     yield new_cred
-    delete_api.identities_id_delete(new_cred.id)
+    identities_api.identities_id_delete(new_cred.id)
 
 
 @pytest.fixture(scope="session")
-def source_username_credentials(create_api, delete_api):
+def source_username_credentials(identities_api):
     credential_data = {
-        "name": generate_credential_name(start="source-git"),
+        "name": generate_string(start="source-git-creds"),
         "kind": "source",
         "password": config.get("cred_git_token"),
         "user": config.get("cred_git_username"),
     }
-    with create_credentials(
-        credential_data=credential_data, create_api=create_api, delete_api=delete_api
-    ) as source_creds:
+    with create_credentials(credential_data=credential_data, identities_api=identities_api) as source_creds:
         yield source_creds
 
 
@@ -60,9 +53,7 @@ def xml_maven_settings():
 
 
 @pytest.fixture(scope="session")
-def maven_credential(xml_maven_settings, create_api, delete_api):
-    credential_data = {"name": generate_credential_name(start="maven"), "kind": "maven", "settings": xml_maven_settings}
-    with create_credentials(
-        credential_data=credential_data, create_api=create_api, delete_api=delete_api
-    ) as maven_creds:
+def maven_credential(xml_maven_settings, identities_api):
+    credential_data = {"name": generate_string(start="maven-creds"), "kind": "maven", "settings": xml_maven_settings}
+    with create_credentials(credential_data=credential_data, identities_api=identities_api) as maven_creds:
         yield maven_creds
