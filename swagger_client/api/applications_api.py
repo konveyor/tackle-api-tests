@@ -591,47 +591,47 @@ class ApplicationsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def applications_id_facts_get(self, id, **kwargs):  # noqa: E501
-        """List facts.  # noqa: E501
+    def applications_id_facts_key_delete(self, id, key, **kwargs):  # noqa: E501
+        """Delete a fact.  # noqa: E501
 
-        List facts. Can be filtered by source. By default facts from all sources are returned.  # noqa: E501
+        Delete a fact. see api.FactKey for details on key parameter format.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_get(id, async_req=True)
+        >>> thread = api.applications_id_facts_key_delete(id, key, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str id: Application ID (required)
-        :param str source: Fact source
-        :return: list[ApiFact]
+        :param str key: Fact key (required)
+        :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.applications_id_facts_get_with_http_info(id, **kwargs)  # noqa: E501
+            return self.applications_id_facts_key_delete_with_http_info(id, key, **kwargs)  # noqa: E501
         else:
-            (data) = self.applications_id_facts_get_with_http_info(id, **kwargs)  # noqa: E501
+            (data) = self.applications_id_facts_key_delete_with_http_info(id, key, **kwargs)  # noqa: E501
             return data
 
-    def applications_id_facts_get_with_http_info(self, id, **kwargs):  # noqa: E501
-        """List facts.  # noqa: E501
+    def applications_id_facts_key_delete_with_http_info(self, id, key, **kwargs):  # noqa: E501
+        """Delete a fact.  # noqa: E501
 
-        List facts. Can be filtered by source. By default facts from all sources are returned.  # noqa: E501
+        Delete a fact. see api.FactKey for details on key parameter format.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_get_with_http_info(id, async_req=True)
+        >>> thread = api.applications_id_facts_key_delete_with_http_info(id, key, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str id: Application ID (required)
-        :param str source: Fact source
-        :return: list[ApiFact]
+        :param str key: Fact key (required)
+        :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['id', 'source']  # noqa: E501
+        all_params = ['id', 'key']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -642,24 +642,127 @@ class ApplicationsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method applications_id_facts_get" % key
+                    " to method applications_id_facts_key_delete" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'id' is set
         if self.api_client.client_side_validation and ('id' not in params or
                                                        params['id'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_get`")  # noqa: E501
+            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_key_delete`")  # noqa: E501
+        # verify the required parameter 'key' is set
+        if self.api_client.client_side_validation and ('key' not in params or
+                                                       params['key'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `key` when calling `applications_id_facts_key_delete`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'id' in params:
             path_params['id'] = params['id']  # noqa: E501
+        if 'key' in params:
+            path_params['key'] = params['key']  # noqa: E501
 
         query_params = []
-        if 'source' in params:
-            query_params.append(('source', params['source']))  # noqa: E501
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        # Authentication setting
+        auth_settings = ['bearerAuth']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/applications/{id}/facts/{key}', 'DELETE',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type=None,  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def applications_id_facts_key_get(self, id, key, **kwargs):  # noqa: E501
+        """Get fact by name.  # noqa: E501
+
+        Get fact by name. see api.FactKey for details on key parameter format.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.applications_id_facts_key_get(id, key, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Application ID (required)
+        :param str key: Fact key (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.applications_id_facts_key_get_with_http_info(id, key, **kwargs)  # noqa: E501
+        else:
+            (data) = self.applications_id_facts_key_get_with_http_info(id, key, **kwargs)  # noqa: E501
+            return data
+
+    def applications_id_facts_key_get_with_http_info(self, id, key, **kwargs):  # noqa: E501
+        """Get fact by name.  # noqa: E501
+
+        Get fact by name. see api.FactKey for details on key parameter format.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.applications_id_facts_key_get_with_http_info(id, key, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Application ID (required)
+        :param str key: Fact key (required)
+        :return: object
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'key']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method applications_id_facts_key_get" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if self.api_client.client_side_validation and ('id' not in params or
+                                                       params['id'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_key_get`")  # noqa: E501
+        # verify the required parameter 'key' is set
+        if self.api_client.client_side_validation and ('key' not in params or
+                                                       params['key'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `key` when calling `applications_id_facts_key_get`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+        if 'key' in params:
+            path_params['key'] = params['key']  # noqa: E501
+
+        query_params = []
 
         header_params = {}
 
@@ -675,14 +778,14 @@ class ApplicationsApi(object):
         auth_settings = ['bearerAuth']  # noqa: E501
 
         return self.api_client.call_api(
-            '/applications/{id}/facts', 'GET',
+            '/applications/{id}/facts/{key}', 'GET',
             path_params,
             query_params,
             header_params,
             body=body_params,
             post_params=form_params,
             files=local_var_files,
-            response_type='list[ApiFact]',  # noqa: E501
+            response_type='object',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -690,51 +793,49 @@ class ApplicationsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def applications_id_facts_key_put(self, id, key, source, fact, **kwargs):  # noqa: E501
+    def applications_id_facts_key_put(self, id, key, fact, **kwargs):  # noqa: E501
         """Update (or create) a fact.  # noqa: E501
 
-        Update (or create) a fact.  # noqa: E501
+        Update (or create) a fact. see api.FactKey for details on key parameter format.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_key_put(id, key, source, fact, async_req=True)
+        >>> thread = api.applications_id_facts_key_put(id, key, fact, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str id: Application ID (required)
         :param str key: Fact key (required)
-        :param str source: Fact source (required)
-        :param ApiFact fact: Fact data (required)
+        :param object fact: Fact value (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.applications_id_facts_key_put_with_http_info(id, key, source, fact, **kwargs)  # noqa: E501
+            return self.applications_id_facts_key_put_with_http_info(id, key, fact, **kwargs)  # noqa: E501
         else:
-            (data) = self.applications_id_facts_key_put_with_http_info(id, key, source, fact, **kwargs)  # noqa: E501
+            (data) = self.applications_id_facts_key_put_with_http_info(id, key, fact, **kwargs)  # noqa: E501
             return data
 
-    def applications_id_facts_key_put_with_http_info(self, id, key, source, fact, **kwargs):  # noqa: E501
+    def applications_id_facts_key_put_with_http_info(self, id, key, fact, **kwargs):  # noqa: E501
         """Update (or create) a fact.  # noqa: E501
 
-        Update (or create) a fact.  # noqa: E501
+        Update (or create) a fact. see api.FactKey for details on key parameter format.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_key_put_with_http_info(id, key, source, fact, async_req=True)
+        >>> thread = api.applications_id_facts_key_put_with_http_info(id, key, fact, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str id: Application ID (required)
         :param str key: Fact key (required)
-        :param str source: Fact source (required)
-        :param ApiFact fact: Fact data (required)
+        :param object fact: Fact value (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['id', 'key', 'source', 'fact']  # noqa: E501
+        all_params = ['id', 'key', 'fact']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -757,10 +858,6 @@ class ApplicationsApi(object):
         if self.api_client.client_side_validation and ('key' not in params or
                                                        params['key'] is None):  # noqa: E501
             raise ValueError("Missing the required parameter `key` when calling `applications_id_facts_key_put`")  # noqa: E501
-        # verify the required parameter 'source' is set
-        if self.api_client.client_side_validation and ('source' not in params or
-                                                       params['source'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `source` when calling `applications_id_facts_key_put`")  # noqa: E501
         # verify the required parameter 'fact' is set
         if self.api_client.client_side_validation and ('fact' not in params or
                                                        params['fact'] is None):  # noqa: E501
@@ -773,8 +870,6 @@ class ApplicationsApi(object):
             path_params['id'] = params['id']  # noqa: E501
         if 'key' in params:
             path_params['key'] = params['key']  # noqa: E501
-        if 'source' in params:
-            path_params['source'] = params['source']  # noqa: E501
 
         query_params = []
 
@@ -806,224 +901,6 @@ class ApplicationsApi(object):
             post_params=form_params,
             files=local_var_files,
             response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def applications_id_facts_key_source_delete(self, id, key, source, **kwargs):  # noqa: E501
-        """Delete a fact.  # noqa: E501
-
-        Delete a fact.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_key_source_delete(id, key, source, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param str id: Application ID (required)
-        :param str key: Fact key (required)
-        :param str source: Fact source (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.applications_id_facts_key_source_delete_with_http_info(id, key, source, **kwargs)  # noqa: E501
-        else:
-            (data) = self.applications_id_facts_key_source_delete_with_http_info(id, key, source, **kwargs)  # noqa: E501
-            return data
-
-    def applications_id_facts_key_source_delete_with_http_info(self, id, key, source, **kwargs):  # noqa: E501
-        """Delete a fact.  # noqa: E501
-
-        Delete a fact.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_key_source_delete_with_http_info(id, key, source, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param str id: Application ID (required)
-        :param str key: Fact key (required)
-        :param str source: Fact source (required)
-        :return: None
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['id', 'key', 'source']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in six.iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method applications_id_facts_key_source_delete" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'id' is set
-        if self.api_client.client_side_validation and ('id' not in params or
-                                                       params['id'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_key_source_delete`")  # noqa: E501
-        # verify the required parameter 'key' is set
-        if self.api_client.client_side_validation and ('key' not in params or
-                                                       params['key'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `key` when calling `applications_id_facts_key_source_delete`")  # noqa: E501
-        # verify the required parameter 'source' is set
-        if self.api_client.client_side_validation and ('source' not in params or
-                                                       params['source'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `source` when calling `applications_id_facts_key_source_delete`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'id' in params:
-            path_params['id'] = params['id']  # noqa: E501
-        if 'key' in params:
-            path_params['key'] = params['key']  # noqa: E501
-        if 'source' in params:
-            path_params['source'] = params['source']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # Authentication setting
-        auth_settings = ['bearerAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/applications/{id}/facts/{key}/{source}', 'DELETE',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type=None,  # noqa: E501
-            auth_settings=auth_settings,
-            async_req=params.get('async_req'),
-            _return_http_data_only=params.get('_return_http_data_only'),
-            _preload_content=params.get('_preload_content', True),
-            _request_timeout=params.get('_request_timeout'),
-            collection_formats=collection_formats)
-
-    def applications_id_facts_name_source_get(self, id, key, source, **kwargs):  # noqa: E501
-        """Get fact by name.  # noqa: E501
-
-        Get fact by name.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_name_source_get(id, key, source, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param str id: Application ID (required)
-        :param str key: Fact key (required)
-        :param str source: Fact source (required)
-        :return: ApiFact
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-        kwargs['_return_http_data_only'] = True
-        if kwargs.get('async_req'):
-            return self.applications_id_facts_name_source_get_with_http_info(id, key, source, **kwargs)  # noqa: E501
-        else:
-            (data) = self.applications_id_facts_name_source_get_with_http_info(id, key, source, **kwargs)  # noqa: E501
-            return data
-
-    def applications_id_facts_name_source_get_with_http_info(self, id, key, source, **kwargs):  # noqa: E501
-        """Get fact by name.  # noqa: E501
-
-        Get fact by name.  # noqa: E501
-        This method makes a synchronous HTTP request by default. To make an
-        asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_name_source_get_with_http_info(id, key, source, async_req=True)
-        >>> result = thread.get()
-
-        :param async_req bool
-        :param str id: Application ID (required)
-        :param str key: Fact key (required)
-        :param str source: Fact source (required)
-        :return: ApiFact
-                 If the method is called asynchronously,
-                 returns the request thread.
-        """
-
-        all_params = ['id', 'key', 'source']  # noqa: E501
-        all_params.append('async_req')
-        all_params.append('_return_http_data_only')
-        all_params.append('_preload_content')
-        all_params.append('_request_timeout')
-
-        params = locals()
-        for key, val in six.iteritems(params['kwargs']):
-            if key not in all_params:
-                raise TypeError(
-                    "Got an unexpected keyword argument '%s'"
-                    " to method applications_id_facts_name_source_get" % key
-                )
-            params[key] = val
-        del params['kwargs']
-        # verify the required parameter 'id' is set
-        if self.api_client.client_side_validation and ('id' not in params or
-                                                       params['id'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_name_source_get`")  # noqa: E501
-        # verify the required parameter 'key' is set
-        if self.api_client.client_side_validation and ('key' not in params or
-                                                       params['key'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `key` when calling `applications_id_facts_name_source_get`")  # noqa: E501
-        # verify the required parameter 'source' is set
-        if self.api_client.client_side_validation and ('source' not in params or
-                                                       params['source'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `source` when calling `applications_id_facts_name_source_get`")  # noqa: E501
-
-        collection_formats = {}
-
-        path_params = {}
-        if 'id' in params:
-            path_params['id'] = params['id']  # noqa: E501
-        if 'key' in params:
-            path_params['key'] = params['key']  # noqa: E501
-        if 'source' in params:
-            path_params['source'] = params['source']  # noqa: E501
-
-        query_params = []
-
-        header_params = {}
-
-        form_params = []
-        local_var_files = {}
-
-        body_params = None
-        # HTTP header `Accept`
-        header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # Authentication setting
-        auth_settings = ['bearerAuth']  # noqa: E501
-
-        return self.api_client.call_api(
-            '/applications/{id}/facts/{name}/{source}', 'GET',
-            path_params,
-            query_params,
-            header_params,
-            body=body_params,
-            post_params=form_params,
-            files=local_var_files,
-            response_type='ApiFact',  # noqa: E501
             auth_settings=auth_settings,
             async_req=params.get('async_req'),
             _return_http_data_only=params.get('_return_http_data_only'),
@@ -1138,42 +1015,42 @@ class ApplicationsApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def applications_id_facts_put(self, id, source, **kwargs):  # noqa: E501
-        """Replace all facts from a source.  # noqa: E501
+    def applications_id_facts_source_get(self, id, source, **kwargs):  # noqa: E501
+        """List facts.  # noqa: E501
 
-        Replace all facts from a source.  # noqa: E501
+        List facts by source. see api.FactKey for details on key parameter format.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_put(id, source, async_req=True)
+        >>> thread = api.applications_id_facts_source_get(id, source, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str id: Application ID (required)
-        :param str source: Source (required)
-        :return: None
+        :param str source: Source key (required)
+        :return: ApiFactMap
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.applications_id_facts_put_with_http_info(id, source, **kwargs)  # noqa: E501
+            return self.applications_id_facts_source_get_with_http_info(id, source, **kwargs)  # noqa: E501
         else:
-            (data) = self.applications_id_facts_put_with_http_info(id, source, **kwargs)  # noqa: E501
+            (data) = self.applications_id_facts_source_get_with_http_info(id, source, **kwargs)  # noqa: E501
             return data
 
-    def applications_id_facts_put_with_http_info(self, id, source, **kwargs):  # noqa: E501
-        """Replace all facts from a source.  # noqa: E501
+    def applications_id_facts_source_get_with_http_info(self, id, source, **kwargs):  # noqa: E501
+        """List facts.  # noqa: E501
 
-        Replace all facts from a source.  # noqa: E501
+        List facts by source. see api.FactKey for details on key parameter format.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.applications_id_facts_put_with_http_info(id, source, async_req=True)
+        >>> thread = api.applications_id_facts_source_get_with_http_info(id, source, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
         :param str id: Application ID (required)
-        :param str source: Source (required)
-        :return: None
+        :param str source: Source key (required)
+        :return: ApiFactMap
                  If the method is called asynchronously,
                  returns the request thread.
         """
@@ -1189,28 +1066,28 @@ class ApplicationsApi(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method applications_id_facts_put" % key
+                    " to method applications_id_facts_source_get" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'id' is set
         if self.api_client.client_side_validation and ('id' not in params or
                                                        params['id'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_put`")  # noqa: E501
+            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_source_get`")  # noqa: E501
         # verify the required parameter 'source' is set
         if self.api_client.client_side_validation and ('source' not in params or
                                                        params['source'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `source` when calling `applications_id_facts_put`")  # noqa: E501
+            raise ValueError("Missing the required parameter `source` when calling `applications_id_facts_source_get`")  # noqa: E501
 
         collection_formats = {}
 
         path_params = {}
         if 'id' in params:
             path_params['id'] = params['id']  # noqa: E501
+        if 'source' in params:
+            path_params['source'] = params['source']  # noqa: E501
 
         query_params = []
-        if 'source' in params:
-            query_params.append(('source', params['source']))  # noqa: E501
 
         header_params = {}
 
@@ -1218,11 +1095,122 @@ class ApplicationsApi(object):
         local_var_files = {}
 
         body_params = None
+        # HTTP header `Accept`
+        header_params['Accept'] = self.api_client.select_header_accept(
+            ['application/json'])  # noqa: E501
+
         # Authentication setting
         auth_settings = ['bearerAuth']  # noqa: E501
 
         return self.api_client.call_api(
-            '/applications/{id}/facts', 'PUT',
+            '/applications/{id}/facts/{source}:', 'GET',
+            path_params,
+            query_params,
+            header_params,
+            body=body_params,
+            post_params=form_params,
+            files=local_var_files,
+            response_type='ApiFactMap',  # noqa: E501
+            auth_settings=auth_settings,
+            async_req=params.get('async_req'),
+            _return_http_data_only=params.get('_return_http_data_only'),
+            _preload_content=params.get('_preload_content', True),
+            _request_timeout=params.get('_request_timeout'),
+            collection_formats=collection_formats)
+
+    def applications_id_facts_source_put(self, id, source, factmap, **kwargs):  # noqa: E501
+        """Replace all facts from a source.  # noqa: E501
+
+        Replace all facts from a source. see api.FactKey for details on key parameter format.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.applications_id_facts_source_put(id, source, factmap, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Application ID (required)
+        :param str source: Fact key (required)
+        :param ApiFactMap factmap: Fact map (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+        kwargs['_return_http_data_only'] = True
+        if kwargs.get('async_req'):
+            return self.applications_id_facts_source_put_with_http_info(id, source, factmap, **kwargs)  # noqa: E501
+        else:
+            (data) = self.applications_id_facts_source_put_with_http_info(id, source, factmap, **kwargs)  # noqa: E501
+            return data
+
+    def applications_id_facts_source_put_with_http_info(self, id, source, factmap, **kwargs):  # noqa: E501
+        """Replace all facts from a source.  # noqa: E501
+
+        Replace all facts from a source. see api.FactKey for details on key parameter format.  # noqa: E501
+        This method makes a synchronous HTTP request by default. To make an
+        asynchronous HTTP request, please pass async_req=True
+        >>> thread = api.applications_id_facts_source_put_with_http_info(id, source, factmap, async_req=True)
+        >>> result = thread.get()
+
+        :param async_req bool
+        :param str id: Application ID (required)
+        :param str source: Fact key (required)
+        :param ApiFactMap factmap: Fact map (required)
+        :return: None
+                 If the method is called asynchronously,
+                 returns the request thread.
+        """
+
+        all_params = ['id', 'source', 'factmap']  # noqa: E501
+        all_params.append('async_req')
+        all_params.append('_return_http_data_only')
+        all_params.append('_preload_content')
+        all_params.append('_request_timeout')
+
+        params = locals()
+        for key, val in six.iteritems(params['kwargs']):
+            if key not in all_params:
+                raise TypeError(
+                    "Got an unexpected keyword argument '%s'"
+                    " to method applications_id_facts_source_put" % key
+                )
+            params[key] = val
+        del params['kwargs']
+        # verify the required parameter 'id' is set
+        if self.api_client.client_side_validation and ('id' not in params or
+                                                       params['id'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `id` when calling `applications_id_facts_source_put`")  # noqa: E501
+        # verify the required parameter 'source' is set
+        if self.api_client.client_side_validation and ('source' not in params or
+                                                       params['source'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `source` when calling `applications_id_facts_source_put`")  # noqa: E501
+        # verify the required parameter 'factmap' is set
+        if self.api_client.client_side_validation and ('factmap' not in params or
+                                                       params['factmap'] is None):  # noqa: E501
+            raise ValueError("Missing the required parameter `factmap` when calling `applications_id_facts_source_put`")  # noqa: E501
+
+        collection_formats = {}
+
+        path_params = {}
+        if 'id' in params:
+            path_params['id'] = params['id']  # noqa: E501
+        if 'source' in params:
+            path_params['source'] = params['source']  # noqa: E501
+
+        query_params = []
+
+        header_params = {}
+
+        form_params = []
+        local_var_files = {}
+
+        body_params = None
+        if 'factmap' in params:
+            body_params = params['factmap']
+        # Authentication setting
+        auth_settings = ['bearerAuth']  # noqa: E501
+
+        return self.api_client.call_api(
+            '/applications/{id}/facts/{source}:', 'PUT',
             path_params,
             query_params,
             header_params,

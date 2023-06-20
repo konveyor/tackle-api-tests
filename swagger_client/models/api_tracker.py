@@ -256,7 +256,7 @@ class ApiTracker(object):
         """
         if self._configuration.client_side_validation and kind is None:
             raise ValueError("Invalid value for `kind`, must not be `None`")  # noqa: E501
-        allowed_values = ["jira-cloud", "jira-server", "jira-datacenter"]  # noqa: E501
+        allowed_values = ["jira-cloud", "jira-onprem"]  # noqa: E501
         if (self._configuration.client_side_validation and
                 kind not in allowed_values):
             raise ValueError(

@@ -33,7 +33,6 @@ class ApiIssue(object):
                             and the value is json key in definition.
     """
     swagger_types = {
-        'application': 'int',
         'category': 'str',
         'create_time': 'str',
         'create_user': 'str',
@@ -43,7 +42,7 @@ class ApiIssue(object):
         'id': 'int',
         'incidents': 'list[ApiIncident]',
         'labels': 'list[str]',
-        'links': 'list[ApiAnalysisLink]',
+        'links': 'list[ApiLink]',
         'name': 'str',
         'rule': 'str',
         'ruleset': 'str',
@@ -51,7 +50,6 @@ class ApiIssue(object):
     }
 
     attribute_map = {
-        'application': 'application',
         'category': 'category',
         'create_time': 'createTime',
         'create_user': 'createUser',
@@ -68,13 +66,12 @@ class ApiIssue(object):
         'update_user': 'updateUser'
     }
 
-    def __init__(self, application=None, category=None, create_time=None, create_user=None, description=None, effort=None, facts=None, id=None, incidents=None, labels=None, links=None, name=None, rule=None, ruleset=None, update_user=None, _configuration=None):  # noqa: E501
+    def __init__(self, category=None, create_time=None, create_user=None, description=None, effort=None, facts=None, id=None, incidents=None, labels=None, links=None, name=None, rule=None, ruleset=None, update_user=None, _configuration=None):  # noqa: E501
         """ApiIssue - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
         self._configuration = _configuration
 
-        self._application = None
         self._category = None
         self._create_time = None
         self._create_user = None
@@ -91,8 +88,6 @@ class ApiIssue(object):
         self._update_user = None
         self.discriminator = None
 
-        if application is not None:
-            self.application = application
         self.category = category
         if create_time is not None:
             self.create_time = create_time
@@ -117,27 +112,6 @@ class ApiIssue(object):
         self.ruleset = ruleset
         if update_user is not None:
             self.update_user = update_user
-
-    @property
-    def application(self):
-        """Gets the application of this ApiIssue.  # noqa: E501
-
-
-        :return: The application of this ApiIssue.  # noqa: E501
-        :rtype: int
-        """
-        return self._application
-
-    @application.setter
-    def application(self, application):
-        """Sets the application of this ApiIssue.
-
-
-        :param application: The application of this ApiIssue.  # noqa: E501
-        :type: int
-        """
-
-        self._application = application
 
     @property
     def category(self):
@@ -336,7 +310,7 @@ class ApiIssue(object):
 
 
         :return: The links of this ApiIssue.  # noqa: E501
-        :rtype: list[ApiAnalysisLink]
+        :rtype: list[ApiLink]
         """
         return self._links
 
@@ -346,7 +320,7 @@ class ApiIssue(object):
 
 
         :param links: The links of this ApiIssue.  # noqa: E501
-        :type: list[ApiAnalysisLink]
+        :type: list[ApiLink]
         """
 
         self._links = links

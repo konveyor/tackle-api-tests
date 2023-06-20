@@ -34,9 +34,9 @@ class DependenciesApi(object):
         self.api_client = api_client
 
     def analyses_dependencies_get(self, **kwargs):  # noqa: E501
-        """List dependency composites.  # noqa: E501
+        """List dependency reports.  # noqa: E501
 
-        List dependency composites. filters: - name - version - sha - indirect - labels - application.(id|name) - tag.id  # noqa: E501
+        Each report collates dependencies by name and SHA. filters: - name - version - sha - indirect - labels - application.id - application.name - tag.id sort: - name - version - sha  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.analyses_dependencies_get(async_req=True)
@@ -55,9 +55,9 @@ class DependenciesApi(object):
             return data
 
     def analyses_dependencies_get_with_http_info(self, **kwargs):  # noqa: E501
-        """List dependency composites.  # noqa: E501
+        """List dependency reports.  # noqa: E501
 
-        List dependency composites. filters: - name - version - sha - indirect - labels - application.(id|name) - tag.id  # noqa: E501
+        Each report collates dependencies by name and SHA. filters: - name - version - sha - indirect - labels - application.id - application.name - tag.id sort: - name - version - sha  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.analyses_dependencies_get_with_http_info(async_req=True)
@@ -123,7 +123,7 @@ class DependenciesApi(object):
     def application_id_analysis_dependencies_get(self, id, **kwargs):  # noqa: E501
         """List application dependencies.  # noqa: E501
 
-        List application dependencies. filters: - id - name - version - type - sha - indirect  # noqa: E501
+        List application dependencies. filters: - name - version - sha - indirect - labels  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.application_id_analysis_dependencies_get(id, async_req=True)
@@ -145,7 +145,7 @@ class DependenciesApi(object):
     def application_id_analysis_dependencies_get_with_http_info(self, id, **kwargs):  # noqa: E501
         """List application dependencies.  # noqa: E501
 
-        List application dependencies. filters: - id - name - version - type - sha - indirect  # noqa: E501
+        List application dependencies. filters: - name - version - sha - indirect - labels  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.application_id_analysis_dependencies_get_with_http_info(id, async_req=True)

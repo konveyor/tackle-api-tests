@@ -306,45 +306,43 @@ class AnalysesApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def application_id_analyses_post(self, task, **kwargs):  # noqa: E501
+    def application_id_analyses_post(self, **kwargs):  # noqa: E501
         """Create an analysis.  # noqa: E501
 
-        Create an analysis.  # noqa: E501
+        Create an analysis. Form fields: - file: file that contains the api.Analysis resource. - issues: file that multiple api.Issue resources. - dependencies: file that multiple api.TechDependency resources.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.application_id_analyses_post(task, async_req=True)
+        >>> thread = api.application_id_analyses_post(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param ApiAnalysis task: Analysis data (required)
         :return: ApiAnalysis
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.application_id_analyses_post_with_http_info(task, **kwargs)  # noqa: E501
+            return self.application_id_analyses_post_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.application_id_analyses_post_with_http_info(task, **kwargs)  # noqa: E501
+            (data) = self.application_id_analyses_post_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def application_id_analyses_post_with_http_info(self, task, **kwargs):  # noqa: E501
+    def application_id_analyses_post_with_http_info(self, **kwargs):  # noqa: E501
         """Create an analysis.  # noqa: E501
 
-        Create an analysis.  # noqa: E501
+        Create an analysis. Form fields: - file: file that contains the api.Analysis resource. - issues: file that multiple api.Issue resources. - dependencies: file that multiple api.TechDependency resources.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.application_id_analyses_post_with_http_info(task, async_req=True)
+        >>> thread = api.application_id_analyses_post_with_http_info(async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param ApiAnalysis task: Analysis data (required)
         :return: ApiAnalysis
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['task']  # noqa: E501
+        all_params = []  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -359,10 +357,6 @@ class AnalysesApi(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'task' is set
-        if self.api_client.client_side_validation and ('task' not in params or
-                                                       params['task'] is None):  # noqa: E501
-            raise ValueError("Missing the required parameter `task` when calling `application_id_analyses_post`")  # noqa: E501
 
         collection_formats = {}
 
@@ -376,14 +370,8 @@ class AnalysesApi(object):
         local_var_files = {}
 
         body_params = None
-        if 'task' in params:
-            body_params = params['task']
         # HTTP header `Accept`
         header_params['Accept'] = self.api_client.select_header_accept(
-            ['application/json'])  # noqa: E501
-
-        # HTTP header `Content-Type`
-        header_params['Content-Type'] = self.api_client.select_header_content_type(  # noqa: E501
             ['application/json'])  # noqa: E501
 
         # Authentication setting

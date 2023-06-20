@@ -17,7 +17,8 @@ from __future__ import absolute_import
 # import models into model package
 from swagger_client.models.api_addon import ApiAddon
 from swagger_client.models.api_analysis import ApiAnalysis
-from swagger_client.models.api_analysis_link import ApiAnalysisLink
+from swagger_client.models.api_app_report import ApiAppReport
+from swagger_client.models.api_app_report_issue import ApiAppReportIssue
 from swagger_client.models.api_application import ApiApplication
 from swagger_client.models.api_bucket import ApiBucket
 from swagger_client.models.api_business_service import ApiBusinessService
@@ -29,13 +30,14 @@ from swagger_client.models.api_fact import ApiFact
 from swagger_client.models.api_fact_map import ApiFactMap
 from swagger_client.models.api_fields import ApiFields
 from swagger_client.models.api_file import ApiFile
+from swagger_client.models.api_file_report import ApiFileReport
 from swagger_client.models.api_identity import ApiIdentity
 from swagger_client.models.api_import import ApiImport
 from swagger_client.models.api_import_summary import ApiImportSummary
 from swagger_client.models.api_incident import ApiIncident
 from swagger_client.models.api_issue import ApiIssue
-from swagger_client.models.api_issue_composite import ApiIssueComposite
 from swagger_client.models.api_job_function import ApiJobFunction
+from swagger_client.models.api_link import ApiLink
 from swagger_client.models.api_login import ApiLogin
 from swagger_client.models.api_metadata import ApiMetadata
 from swagger_client.models.api_migration_wave import ApiMigrationWave
@@ -44,6 +46,7 @@ from swagger_client.models.api_ref import ApiRef
 from swagger_client.models.api_repository import ApiRepository
 from swagger_client.models.api_review import ApiReview
 from swagger_client.models.api_rule import ApiRule
+from swagger_client.models.api_rule_report import ApiRuleReport
 from swagger_client.models.api_rule_set import ApiRuleSet
 from swagger_client.models.api_schema import ApiSchema
 from swagger_client.models.api_setting import ApiSetting
