@@ -27,6 +27,6 @@ def application(applications_data, source_username_credentials, maven_credential
     if "identities" in app_data:
         app_data["identities"] = [{"id": source_username_credentials.id}, {"id": maven_credential.id}]
     api_app = ApiApplication(**app_data)
-    new_app = applications_api.applications_post(api_app.to_dict())
+    new_app = applications_api.applications_post(api_app)
     yield new_app
     applications_api.applications_id_delete(new_app.id)

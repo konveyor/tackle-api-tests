@@ -25,8 +25,8 @@ def test_analysis(application, analysis_item, tasks_api):
         pytest.skip("The analysis item should not run using the current app. Skipping test")
     task_data = {"mode": analysis_info.get("mode"), "targets": analysis_info.get("targets"), "output": "/windup/report"}
     api_task = ApiTask(addon="windup", application={"id": app.id, "name": app.name}, data=task_data)
-    new_task = tasks_api.tasks_post(task=api_task.to_dict())
+    new_task = tasks_api.tasks_post(task=api_task)
 
     # Start the analysis by calling the submit method
-    tasks_api.tasks_id_submit_put(id=new_task.id, task=new_task)
+    tasks_api.tasks_id_submit_put(id=str(new_task.id), task=new_task)
     wait_for(lambda: tasks_api.tasks_id_get(str(new_task.id)).state == "Succeeded", delay=5, timeout=180)

@@ -11,10 +11,10 @@ def stakeholder(stakeholder_group, job_function, stakeholders_api):
     api_stakeholder = ApiStakeholder(
         email=generate_email(),
         name=generate_string(start="stakeholder"),
-        job_function=job_function,
-        stakeholder_groups=stakeholder_group,
+        # job_function=job_function,
+        # stakeholder_groups=stakeholder_group,
     )
-    new_stakeholder = stakeholders_api.stakeholders_post(api_stakeholder.to_dict())
+    new_stakeholder = stakeholders_api.stakeholders_post(api_stakeholder)
 
     yield new_stakeholder
     stakeholders_api.stakeholders_id_delete(str(new_stakeholder.id))

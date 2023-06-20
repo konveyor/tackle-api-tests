@@ -9,7 +9,7 @@ def business_service(stakeholder, businessservices_api):
     api_business_service = ApiBusinessService(
         name=generate_string(start="business service"), description=generate_string(length=120), owner=stakeholder
     )
-    new_business_service = businessservices_api.businessservices_post(api_business_service.to_dict())
+    new_business_service = businessservices_api.businessservices_post(api_business_service)
 
     yield new_business_service
     businessservices_api.businessservices_id_delete(str(new_business_service.id))
