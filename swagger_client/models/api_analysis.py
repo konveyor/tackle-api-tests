@@ -36,6 +36,7 @@ class ApiAnalysis(object):
         'create_time': 'str',
         'create_user': 'str',
         'dependencies': 'list[ApiTechDependency]',
+        'effort': 'int',
         'id': 'int',
         'issues': 'list[ApiIssue]',
         'update_user': 'str'
@@ -45,12 +46,13 @@ class ApiAnalysis(object):
         'create_time': 'createTime',
         'create_user': 'createUser',
         'dependencies': 'dependencies',
+        'effort': 'effort',
         'id': 'id',
         'issues': 'issues',
         'update_user': 'updateUser'
     }
 
-    def __init__(self, create_time=None, create_user=None, dependencies=None, id=None, issues=None, update_user=None, _configuration=None):  # noqa: E501
+    def __init__(self, create_time=None, create_user=None, dependencies=None, effort=None, id=None, issues=None, update_user=None, _configuration=None):  # noqa: E501
         """ApiAnalysis - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
@@ -59,6 +61,7 @@ class ApiAnalysis(object):
         self._create_time = None
         self._create_user = None
         self._dependencies = None
+        self._effort = None
         self._id = None
         self._issues = None
         self._update_user = None
@@ -70,6 +73,8 @@ class ApiAnalysis(object):
             self.create_user = create_user
         if dependencies is not None:
             self.dependencies = dependencies
+        if effort is not None:
+            self.effort = effort
         if id is not None:
             self.id = id
         if issues is not None:
@@ -139,6 +144,27 @@ class ApiAnalysis(object):
         """
 
         self._dependencies = dependencies
+
+    @property
+    def effort(self):
+        """Gets the effort of this ApiAnalysis.  # noqa: E501
+
+
+        :return: The effort of this ApiAnalysis.  # noqa: E501
+        :rtype: int
+        """
+        return self._effort
+
+    @effort.setter
+    def effort(self, effort):
+        """Sets the effort of this ApiAnalysis.
+
+
+        :param effort: The effort of this ApiAnalysis.  # noqa: E501
+        :type: int
+        """
+
+        self._effort = effort
 
     @property
     def id(self):

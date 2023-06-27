@@ -11,6 +11,6 @@ def stakeholder_group(stakeholdergroups_api):
     api_stakeholder_group = ApiStakeholderGroup(
         name=generate_string(start="stakeholder group"), description=generate_string(length=120)
     )
-    new_stakeholder_group = stakeholdergroups_api.stakeholdergroups_post(api_stakeholder_group.to_dict())
+    new_stakeholder_group = stakeholdergroups_api.stakeholdergroups_post(api_stakeholder_group)
     yield new_stakeholder_group
     stakeholdergroups_api.stakeholdergroups_id_delete(str(new_stakeholder_group.id))

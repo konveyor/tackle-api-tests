@@ -11,9 +11,9 @@ from swagger_client.models.api_identity import ApiIdentity
 @contextmanager
 def create_credentials(credential_data, identities_api):
     api_identity = ApiIdentity(**credential_data)
-    new_cred = identities_api.identities_post(api_identity.to_dict())
+    new_cred = identities_api.identities_post(api_identity)
     yield new_cred
-    identities_api.identities_id_delete(new_cred.id)
+    identities_api.identities_id_delete(str(new_cred.id))
 
 
 @pytest.fixture(scope="session")

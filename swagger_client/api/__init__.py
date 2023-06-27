@@ -7,6 +7,7 @@ from swagger_client.api.addons_api import AddonsApi
 from swagger_client.api.adoptionplans_api import AdoptionplansApi
 from swagger_client.api.analyses_api import AnalysesApi
 from swagger_client.api.applications_api import ApplicationsApi
+from swagger_client.api.appreports_api import AppreportsApi
 from swagger_client.api.auth_api import AuthApi
 from swagger_client.api.batch_api import BatchApi
 from swagger_client.api.buckets_api import BucketsApi
@@ -14,14 +15,18 @@ from swagger_client.api.businessservices_api import BusinessservicesApi
 from swagger_client.api.cache_api import CacheApi
 from swagger_client.api.dependencies_api import DependenciesApi
 from swagger_client.api.file_api import FileApi
+from swagger_client.api.filereports_api import FilereportsApi
 from swagger_client.api.identities_api import IdentitiesApi
 from swagger_client.api.imports_api import ImportsApi
-from swagger_client.api.issuecomposites_api import IssuecompositesApi
+from swagger_client.api.incidents_api import IncidentsApi
+from swagger_client.api.issue_api import IssueApi
 from swagger_client.api.issues_api import IssuesApi
 from swagger_client.api.jobfunctions_api import JobfunctionsApi
+from swagger_client.api.metrics_api import MetricsApi
 from swagger_client.api.migrationwaves_api import MigrationwavesApi
 from swagger_client.api.proxies_api import ProxiesApi
 from swagger_client.api.reviews_api import ReviewsApi
+from swagger_client.api.rulereports_api import RulereportsApi
 from swagger_client.api.rulesets_api import RulesetsApi
 from swagger_client.api.schema_api import SchemaApi
 from swagger_client.api.settings_api import SettingsApi

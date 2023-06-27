@@ -37,10 +37,11 @@ class ApiIncident(object):
         'create_time': 'str',
         'create_user': 'str',
         'facts': 'ApiFactMap',
+        'file': 'str',
         'id': 'int',
+        'line': 'int',
         'message': 'str',
-        'update_user': 'str',
-        'uri': 'str'
+        'update_user': 'str'
     }
 
     attribute_map = {
@@ -48,13 +49,14 @@ class ApiIncident(object):
         'create_time': 'createTime',
         'create_user': 'createUser',
         'facts': 'facts',
+        'file': 'file',
         'id': 'id',
+        'line': 'line',
         'message': 'message',
-        'update_user': 'updateUser',
-        'uri': 'uri'
+        'update_user': 'updateUser'
     }
 
-    def __init__(self, code_snip=None, create_time=None, create_user=None, facts=None, id=None, message=None, update_user=None, uri=None, _configuration=None):  # noqa: E501
+    def __init__(self, code_snip=None, create_time=None, create_user=None, facts=None, file=None, id=None, line=None, message=None, update_user=None, _configuration=None):  # noqa: E501
         """ApiIncident - a model defined in Swagger"""  # noqa: E501
         if _configuration is None:
             _configuration = Configuration()
@@ -64,10 +66,11 @@ class ApiIncident(object):
         self._create_time = None
         self._create_user = None
         self._facts = None
+        self._file = None
         self._id = None
+        self._line = None
         self._message = None
         self._update_user = None
-        self._uri = None
         self.discriminator = None
 
         if code_snip is not None:
@@ -78,14 +81,16 @@ class ApiIncident(object):
             self.create_user = create_user
         if facts is not None:
             self.facts = facts
+        if file is not None:
+            self.file = file
         if id is not None:
             self.id = id
+        if line is not None:
+            self.line = line
         if message is not None:
             self.message = message
         if update_user is not None:
             self.update_user = update_user
-        if uri is not None:
-            self.uri = uri
 
     @property
     def code_snip(self):
@@ -172,6 +177,27 @@ class ApiIncident(object):
         self._facts = facts
 
     @property
+    def file(self):
+        """Gets the file of this ApiIncident.  # noqa: E501
+
+
+        :return: The file of this ApiIncident.  # noqa: E501
+        :rtype: str
+        """
+        return self._file
+
+    @file.setter
+    def file(self, file):
+        """Sets the file of this ApiIncident.
+
+
+        :param file: The file of this ApiIncident.  # noqa: E501
+        :type: str
+        """
+
+        self._file = file
+
+    @property
     def id(self):
         """Gets the id of this ApiIncident.  # noqa: E501
 
@@ -191,6 +217,27 @@ class ApiIncident(object):
         """
 
         self._id = id
+
+    @property
+    def line(self):
+        """Gets the line of this ApiIncident.  # noqa: E501
+
+
+        :return: The line of this ApiIncident.  # noqa: E501
+        :rtype: int
+        """
+        return self._line
+
+    @line.setter
+    def line(self, line):
+        """Sets the line of this ApiIncident.
+
+
+        :param line: The line of this ApiIncident.  # noqa: E501
+        :type: int
+        """
+
+        self._line = line
 
     @property
     def message(self):
@@ -233,27 +280,6 @@ class ApiIncident(object):
         """
 
         self._update_user = update_user
-
-    @property
-    def uri(self):
-        """Gets the uri of this ApiIncident.  # noqa: E501
-
-
-        :return: The uri of this ApiIncident.  # noqa: E501
-        :rtype: str
-        """
-        return self._uri
-
-    @uri.setter
-    def uri(self, uri):
-        """Sets the uri of this ApiIncident.
-
-
-        :param uri: The uri of this ApiIncident.  # noqa: E501
-        :type: str
-        """
-
-        self._uri = uri
 
     def to_dict(self):
         """Returns the model properties as a dict"""
