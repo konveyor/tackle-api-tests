@@ -4,6 +4,7 @@ from pytest_check import check
 from conftest import generate_string
 
 
+@pytest.mark.skip(reason="Bug MTA-582")
 @pytest.mark.stakeholder_groups
 def test_stakeholder_group_crud(stakeholder_group, stakeholdergroups_api):
     # get stakeholder_group_from_db
