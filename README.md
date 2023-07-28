@@ -1,4 +1,6 @@
 # tackle-api-tests
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonveyor%2Ftackle-api-tests.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonveyor%2Ftackle-api-tests?ref=badge_shield)
+
 API tests for TACKLE
 
 Using Swagger client for API testing.
@@ -94,3 +96,7 @@ python3 mta/utils/get-token.py
     ```
 5. Make sure that `swagger_client.configuration.verify_ssl = False` in order not to verify the SSL/TLS request
 6. For more information see: [Swagger Codegen](https://github.com/swagger-api/swagger-codegen#readme)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkonveyor%2Ftackle-api-tests.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkonveyor%2Ftackle-api-tests?ref=badge_large)
