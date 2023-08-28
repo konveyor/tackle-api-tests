@@ -24,19 +24,18 @@ class KeycloakClient:
             if parsed_url.netloc.startswith("mta"):
                 self.realm_name = "mta"
                 self.client_id = "mta-ui"
-                self.keycloak_openid = KeycloakOpenID(
-                    server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
-                )
             else:
                 self.realm_name = "tackle"
                 self.client_id = "tackle-ui"
+            self.keycloak_openid = KeycloakOpenID(
+                server_url=f"{self.url}/auth/", client_id=self.client_id, realm_name=self.realm_name, verify=False
+            )
 
         else:
             self.__dict__ = KeycloakClient.__shared_state
 
     def get_access_token(self):
-        if self.realm_name == "mta":
-            return self.keycloak_openid.token(self.username, self.password)["access_token"]
+        return self.keycloak_openid.token(self.username, self.password)["access_token"]
 
 
 class TackleApiGateway:
